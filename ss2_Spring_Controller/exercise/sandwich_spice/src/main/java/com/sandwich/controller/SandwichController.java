@@ -1,7 +1,6 @@
 package com.sandwich.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,12 +10,16 @@ public class SandwichController {
         return "spice";
     }
 
-    @RequestMapping("/save")
-    public ModelAndView save(@RequestParam(value = "condiment", defaultValue = "") String[] arr) {
+    @GetMapping("/save")
+    public ModelAndView result(@RequestParam(value = "condiment", defaultValue = "") String[] arr) {
+        ModelAndView modelAndView = new ModelAndView("spice");
+        
         if (arr.length == 0) {
-            return new ModelAndView("spice", "condiment", "You have not chosen!");
+            modelAndView.addObject("condiment", "You not choose!");
         } else {
-            return new ModelAndView("spice", "condiment", arr);
+            modelAndView.addObject("condiment", arr);
         }
+
+        return modelAndView;
     }
 }
