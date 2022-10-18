@@ -13,7 +13,7 @@ public class SandwichController {
     @GetMapping("/save")
     public ModelAndView result(@RequestParam(value = "condiment", defaultValue = "") String[] arr) {
         ModelAndView modelAndView = new ModelAndView("spice");
-        
+
         if (arr.length == 0) {
             modelAndView.addObject("condiment", "You not choose!");
         } else {
