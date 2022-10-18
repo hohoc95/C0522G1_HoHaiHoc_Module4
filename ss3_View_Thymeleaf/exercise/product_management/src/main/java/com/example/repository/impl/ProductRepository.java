@@ -4,6 +4,7 @@ import com.example.model.Product;
 import com.example.repository.IProductRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public List<Product> findAll() {
-        return null;
+        return new ArrayList<>(productList.values());
     }
 
     @Override
@@ -37,12 +38,19 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
-    public void delete(int id) {
+    public void remove(int id) {
 
     }
 
     @Override
-    public void findByName(String name) {
+    public List<Product> findByName(String name) {
+        List<Product> products = new ArrayList<>();
 
+        for (Product item : productList.values()) {
+            if (item.getName().contains(name)) {
+                products.add(item);
+            }
+        }
+        return products;
     }
 }
