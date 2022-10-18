@@ -11,16 +11,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private IProductService productService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String showList(Model model) {
         List<Product> productList = productService.findAll();
         model.addAttribute("products", productList);
-        return "list";
+        return "/list";
     }
 
     @GetMapping("/create")
@@ -52,7 +51,7 @@ public class ProductController {
     @GetMapping("/delete/{id}")
     private String delete(@PathVariable int id, Model model) {
         model.addAttribute("product", productService.findById(id));
-        return "/delete";
+        return "delete";
     }
 
     @PostMapping("/delete")
@@ -71,7 +70,7 @@ public class ProductController {
     @GetMapping("/search")
     public String showListSearch(@RequestParam String name, Model model) {
         model.addAttribute("products", productService.findByName(name));
-        return "/list";
+        return "list";
     }
 
 }
