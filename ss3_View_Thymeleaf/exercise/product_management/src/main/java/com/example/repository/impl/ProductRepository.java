@@ -43,6 +43,12 @@ public class ProductRepository implements IProductRepository {
     }
 
     @Override
+    public Product findById(int id) {
+
+        return productList.get(id);
+    }
+
+    @Override
     public List<Product> findByName(String name) {
         List<Product> products = new ArrayList<>();
 
