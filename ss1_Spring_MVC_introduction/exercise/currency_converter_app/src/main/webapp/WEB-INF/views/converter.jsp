@@ -12,9 +12,6 @@
 </head>
 <body>
 <form action="/exchange" method="get">
-    <%--    <label>Rate: </label><br/>--%>
-    <%--    <input type="number" name="rate" placeholder="RATE" /><br/>--%>
-<%--    <label>USD: </label><br/>--%>
     <input type="number" name="money" placeholder="USD" /><br/>
     <input type="submit"  value="Converter"/>
 </form>
