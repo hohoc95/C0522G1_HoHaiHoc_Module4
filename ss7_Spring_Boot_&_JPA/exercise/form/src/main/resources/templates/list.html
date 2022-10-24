@@ -10,9 +10,9 @@
 </head>
 <body>
 
-<h2>Blog list</h2>
+<h2>User list</h2>
 
-<a th:href="@{/create}">Add new blog</a>
+<a th:href="@{/create}">Add new user</a>
 
 <form action="/search" method="get">
     <input type="text" name="nameSearch">
@@ -25,32 +25,34 @@
     <!--<table border="1" class="table table-striped  table-bordered text-center" id="productList">-->
     <tr>
         <th>Id</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Date</th>
-        <th>Content</th>
+        <th>Firt Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Phone</th>
         <th>Edit</th>
         <th>Delete</th>
         <th>View</th>
     </tr>
 
-    <tr th:each="blog : ${blogList}">
-        <td th:text="${blog.id}"></td>
-        <td th:text="${blog.title}"></td>
-        <td th:text="${blog.author}"></td>
-        <td th:text="${blog.date}"></td>
-        <td th:text="${blog.content}"></td>
-        <td><a th:href="@{/edit/__${blog.id}__}">edit</a></td>
-        <td><a th:href="@{/delete/__${blog.id}__}">delete</a></td>
-        <td><a th:href="@{/view/__${blog.id}__}">view</a></td>
+    <tr th:each="list : ${userList}">
+        <td th:text="${list.id}"></td>
+        <td th:text="${list.firstName}"></td>
+        <td th:text="${list.lastName}"></td>
+        <td th:text="${list.userAge}"></td>
+        <td th:text="${list.userEmail}"></td>
+        <td th:text="${list.phoneNumber}"></td>
+        <td><a th:href="@{/edit/__${list.id}__}">edit</a></td>
+        <td><a th:href="@{/delete/__${list.id}__}">delete</a></td>
+        <td><a th:href="@{/view/__${list.id}__}">view</a></td>
     </tr>
 
 </table>
 
 <div>
-    <a th:href="@{'/'(page=${blogList.number - 1}, name=${nameSearch})}" th:if="${blogList.hasPrevious()}">Trước</a>
-    <span th:text="${blogList.number + 1}"></span>/<span th:text="${blogList.totalPages}"></span>
-    <a th:href="@{'/'(page=${blogList.number + 1}, name=${nameSearch})}" th:if="${blogList.hasNext()}">Sau</a>
+    <a th:href="@{'/'(page=${userList.number - 1}, name=${nameSearch})}" th:if="${userList.hasPrevious()}">Trước</a>
+    <span th:text="${userList.number + 1}"></span>/<span th:text="${userList.totalPages}"></span>
+    <a th:href="@{'/'(page=${userList.number + 1}, name=${nameSearch})}" th:if="${userList.hasNext()}">Sau</a>
 </div>
 
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"-->

@@ -1,22 +1,17 @@
-package com.create_blog.model;
+package com.create_blog.dto;
 
-import javax.persistence.*;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-@Entity
-public class Blog {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BlogDto implements Validator {
     private int id;
     private String title;
     private String author;
     private String date;
     private String content;
 
-    public Blog() {
+    public BlogDto() {
     }
-    @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
 
     public int getId() {
         return id;
@@ -58,11 +53,16 @@ public class Blog {
         this.content = content;
     }
 
-    public Category getCategory() {
-        return category;
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    @Override
+    public void validate(Object target, Errors errors) {
+        BlogDto blogDto = (BlogDto) target;
+        if ("title".equals(BlogDto.getTitle())){
+            errors.rejectValue("title","title.forbidden","Không được trống title");
+        }
     }
 }

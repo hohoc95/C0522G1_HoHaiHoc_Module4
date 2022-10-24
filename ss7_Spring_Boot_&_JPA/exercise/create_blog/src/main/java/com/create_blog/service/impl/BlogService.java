@@ -31,14 +31,25 @@ public class BlogService implements IBlogService {
     public void save(Blog blog) {
         iBlogRepository.save(blog);
     }
-//
-//    @Override
-//    public void delete(int id) {
-//        iBlogRepository.deleteById(id);
-//    }
-//
+
+    @Override
+    public void update(Blog blog) {
+        iBlogRepository.save(blog);
+
+    }
+
+    @Override
+    public void remove(int id) {
+        iBlogRepository.deleteById(id);
+    }
+
+    @Override
+    public Blog findById(int id) {
+        return iBlogRepository.findById(id);
+    }
+
 //    @Override
 //    public List<Blog> findByName(String keyword) {
-//        return iBlogRepository.findByName(keyword);
+//        return iBlogRepository.findByNameContaining(keyword);
 //    }
 }

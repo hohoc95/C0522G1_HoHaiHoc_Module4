@@ -10,6 +10,8 @@ public interface IBlogService {
     List<Blog> findAll();
     Page<Blog> findAll(Pageable pageable);
     void save(Blog blog);
-//    void delete(int id);
+    void update(Blog blog);
+    void remove(int id);
+    Blog findById(int id);
 //    List<Blog> findByName(String keyword);
 }
