@@ -32,7 +32,7 @@ public class BlogController {
 //    public ModelAndView showBlogList() {
 //        return new ModelAndView("blog", "blogList", iBlogService.findAll());
 //    }
-    @GetMapping("")
+    @GetMapping("/")
     public ModelAndView showBlogList(@PageableDefault(value = 5) Pageable pageable, @RequestParam(required = false) String nameSearch) {
         Page<Blog> pages = iBlogService.findAll(pageable);
         return new ModelAndView("blog", "blogList", pages);
@@ -47,23 +47,23 @@ public class BlogController {
         return "/create";
     }
 
-    //    @PostMapping("/save")
-//    public String save(Blog blog, RedirectAttributes redirectAttributes){
-//        iBlogService.save(blog);
-//        redirectAttributes.addFlashAttribute("mess", "Add new successful!");
-//        return "redirect:/";
-//    }
-    @PostMapping("/save")
-    public String save(@Validated @ModelAttribute BlogDto blogDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        new BlogDto().validate(blogDto, bindingResult);
-        if(bindingResult.hasFieldErrors()){
-            model.
-        }
+        @PostMapping("/save")
+    public String save(Blog blog, RedirectAttributes redirectAttributes){
+        iBlogService.save(blog);
+        redirectAttributes.addFlashAttribute("mess", "Add new successful!");
+        return "redirect:/";
+    }
+//    @PostMapping("/save")
+//    public String save(@Validated @ModelAttribute BlogDto blogDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+//        new BlogDto().validate(blogDto, bindingResult);
+//        if(bindingResult.hasFieldErrors()){
+//            model.
+//        }
 
 //        iBlogService.save(blog);
 //        redirectAttributes.addFlashAttribute("mess", "Add new successful!");
 //        return "redirect:/";
-    }
+//    }
 
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable int id, Model model) {

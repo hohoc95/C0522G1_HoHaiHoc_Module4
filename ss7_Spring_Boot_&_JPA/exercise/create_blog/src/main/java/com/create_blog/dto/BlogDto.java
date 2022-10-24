@@ -61,8 +61,8 @@ public class BlogDto implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         BlogDto blogDto = (BlogDto) target;
-        if ("title".equals(BlogDto.getTitle())){
-            errors.rejectValue("title","title.forbidden","Không được trống title");
-        }
+//        if ("title".equals(BlogDto.getTitle())){
+//            errors.rejectValue("title","title.forbidden","Không được trống title");
+//        }
     }
 }

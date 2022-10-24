@@ -25,12 +25,24 @@
 
         <tr>
             <td>Last Name:</td>
-            <td><input type="text" th:field="*{lastName}" /></td>
+            <td>
+                <input type="text" th:field="*{lastName}" />
+                <p style="color: aqua"
+                   th:errors="*{lastName}"
+                   th:if="${#fields.hasErrors('lastName')}">
+                </p>
+            </td>
         </tr>
 
         <tr>
             <td>Age:</td>
-            <td><input type="text" th:field="*{userAge}" /></td>
+            <td>
+                <input type="text" th:field="*{userAge}" />
+                <p style="color: aqua"
+                   th:errors="*{userAge}"
+                   th:if="${#fields.hasErrors('userAge')}">
+                </p>
+            </td>
         </tr>
 
 
@@ -38,12 +50,20 @@
             <td>Email:</td>
             <td>
                 <input type="text" th:field="*{userEmail}" />
+                <p style="color: aqua"
+                   th:errors="*{userEmail}"
+                   th:if="${#fields.hasErrors('userEmail')}">
+                </p>
             </td>
         </tr>
         <tr>
             <td>Phone:</td>
             <td>
                 <input type="text" th:field="*{phoneNumber}" />
+                <p style="color: aqua"
+                   th:errors="*{phoneNumber}"
+                   th:if="${#fields.hasErrors('phoneNumber')}">
+                </p>
             </td>
         </tr>
 
