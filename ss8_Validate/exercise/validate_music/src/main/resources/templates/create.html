@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h3>Create blog</h3>
+
+<a th:href="@{/}">Back to song list</a>
+
+<form action="/save" method="post" th:object="${songDto}">
+    <table>
+        <tr>
+            <td>Name Song:</td>
+            <td>
+                <input type="text" th:field="*{nameSong}" />
+                <p style="color: aqua"
+                   th:errors="*{nameSong}"
+                   th:if="${#fields.hasErrors('nameSong')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Singer:</td>
+            <td>
+                <input type="text" th:field="*{singer}" />
+                <p style="color: aqua"
+                   th:errors="*{singer}"
+                   th:if="${#fields.hasErrors('singer')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Category:</td>
+            <td>
+                <input type="text" th:field="*{category}" />
+                <p style="color: aqua"
+                   th:errors="*{category}"
+                   th:if="${#fields.hasErrors('category')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Link:</td>
+            <td>
+                <input type="text" th:field="*{link}" />
+                <p style="color: aqua"
+                   th:errors="*{link}"
+                   th:if="${#fields.hasErrors('link')}">
+                </p>
+            </td>
+        </tr>
+
+    </table>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

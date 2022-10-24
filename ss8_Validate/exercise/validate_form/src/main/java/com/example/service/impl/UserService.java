@@ -14,7 +14,7 @@ import java.util.List;
 public class UserService implements IUserService {
 
     @Autowired
-    IUserReposioty iUserReposioty;
+    private IUserReposioty iUserReposioty;
 
     @Override
     public List<User> findAll() {
@@ -40,6 +40,4 @@ public class UserService implements IUserService {
     public void remove(int id) {
         iUserReposioty.deleteById(id);
     }
-
-
 }
