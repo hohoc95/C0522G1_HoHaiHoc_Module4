@@ -15,7 +15,7 @@ import java.util.List;
 public class BlogService implements IBlogService {
 
     @Autowired
-    IBlogRepository iBlogRepository;
+    private IBlogRepository iBlogRepository;
 
     @Override
     public List<Blog> findAll() {
@@ -48,8 +48,10 @@ public class BlogService implements IBlogService {
         return iBlogRepository.findById(id);
     }
 
-//    @Override
-//    public List<Blog> findByName(String keyword) {
-//        return iBlogRepository.findByNameContaining(keyword);
-//    }
+    @Override
+    public Page<Blog> findByNameContaining(String name , Pageable pageable) {
+        return iBlogRepository.findByTitleContaining(name,pageable);
+    }
+
+
 }

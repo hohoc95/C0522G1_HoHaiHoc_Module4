@@ -46,10 +46,10 @@ public class SongController {
         if(bindingResult.hasFieldErrors()){
             return "/create";
         } else {
-            Song user = new Song();
-            BeanUtils.copyProperties(songDto, user);
+            Song song = new Song();
+            BeanUtils.copyProperties(songDto, song);
 
-            iSongService.save(user);
+            iSongService.save(song);
             redirectAttributes.addFlashAttribute("mess", "Add new successful!");
             return "redirect:/";
         }
@@ -57,16 +57,50 @@ public class SongController {
 
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable int id, Model model) {
-        model.addAttribute("song", iSongService.findById(id));
+        SongDto songDto = new SongDto();
+        Song song = iSongService.findById(id);
+        BeanUtils.copyProperties(song, songDto);
+        model.addAttribute("songDto", songDto);
         return "/edit";
     }
 
     @PostMapping("/update")
-    public String updateSong(@ModelAttribute Song song, RedirectAttributes redirectAttributes) {
-        iSongService.save(song);
-        redirectAttributes.addFlashAttribute("mess", "update successful");
-        return "redirect:/";
+    public String update(@Validated @ModelAttribute SongDto songDto,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes,
+                         Model model) {
+        new SongDto().validate(songDto, bindingResult);
+        if (bindingResult.hasFieldErrors()) {
+            return "/edit";
+        } else {
+            Song song = new Song();
+            BeanUtils.copyProperties(songDto, song);
+
+            iSongService.save(song);
+            redirectAttributes.addFlashAttribute("mess", "Edit successful!");
+            return "redirect:/";
+        }
     }
 
-
+//    @GetMapping("/edit/{id}")
+//    public String showUpdateForm(@PathVariable int id, Model model) {
+//        model.addAttribute("songDto", iSongService.findById(id));
+//        return "/edit";
+//    }
+//
+//    @PostMapping("/update")
+//    public String update(@Validated @ModelAttribute SongDto songDto,
+//                       BindingResult bindingResult,
+//                       RedirectAttributes redirectAttributes) {
+//        if (bindingResult.hasFieldErrors()) {
+//            return "/edit";
+//        } else {
+//            Song song = new Song();
+//            BeanUtils.copyProperties(songDto, song);
+//
+//            iSongService.save(song);
+//            redirectAttributes.addFlashAttribute("mess", "Edit successful!" + song.getNameSong());
+//            return "redirect:/";
+//        }
+//    }
 }

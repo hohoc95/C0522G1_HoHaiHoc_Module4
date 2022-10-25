@@ -32,11 +32,22 @@ public class BlogController {
 //    public ModelAndView showBlogList() {
 //        return new ModelAndView("blog", "blogList", iBlogService.findAll());
 //    }
+
     @GetMapping("/")
-    public ModelAndView showBlogList(@PageableDefault(value = 5) Pageable pageable, @RequestParam(required = false) String nameSearch) {
-        Page<Blog> pages = iBlogService.findAll(pageable);
-        return new ModelAndView("blog", "blogList", pages);
+    public String showBlogList(@PageableDefault(value = 2) Pageable pageable,
+                               @RequestParam(defaultValue = "") String name,
+                               Model model) {
+        System.out.println(name);
+        model.addAttribute("blogList", iBlogService.findByNameContaining(name, pageable));
+        model.addAttribute("name", name);
+        return "/blog";
     }
+
+//    @GetMapping("/")
+//    public ModelAndView showBlogList(@PageableDefault(value = 5) Pageable pageable, @RequestParam(required = false) String nameSearch) {
+//        Page<Blog> pages = iBlogService.findAll(pageable);
+//        return new ModelAndView("blog", "blogList", pages);
+//    }
 
     @GetMapping("/create")
     public String create(Model model) {
@@ -47,8 +58,8 @@ public class BlogController {
         return "/create";
     }
 
-        @PostMapping("/save")
-    public String save(Blog blog, RedirectAttributes redirectAttributes){
+    @PostMapping("/save")
+    public String save(Blog blog, RedirectAttributes redirectAttributes) {
         iBlogService.save(blog);
         redirectAttributes.addFlashAttribute("mess", "Add new successful!");
         return "redirect:/";
@@ -90,6 +101,5 @@ public class BlogController {
         redirectAttributes.addFlashAttribute("mess", "delete successful");
         return "redirect:/";
     }
-
 
 }
