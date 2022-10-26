@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h3>Create book</h3>
+
+<a th:href="@{/}">Back to book list</a>
+
+<form action="/save" method="post" th:object="${bookDto}">
+    <table>
+        <tr>
+            <td>Book Title:</td>
+            <td>
+                <input type="text" th:field="*{bookTitle}" />
+                <p style="color: aqua"
+                   th:errors="*{bookTitle}"
+                   th:if="${#fields.hasErrors('bookTitle')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Book Author:</td>
+            <td>
+                <input type="text" th:field="*{bookAuthor}" />
+                <p style="color: aqua"
+                   th:errors="*{bookAuthor}"
+                   th:if="${#fields.hasErrors('bookAuthor')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Amount:</td>
+            <td>
+                <input type="text" th:field="*{amount}" />
+                <p style="color: aqua"
+                   th:errors="*{amount}"
+                   th:if="${#fields.hasErrors('amount')}">
+                </p>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>Total Book:</td>
+            <td>
+                <input type="text" th:field="*{bookTotal}" />
+                <p style="color: aqua"
+                   th:errors="*{bookTotal}"
+                   th:if="${#fields.hasErrors('bookTotal')}">
+                </p>
+            </td>
+        </tr>
+
+
+    </table>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
