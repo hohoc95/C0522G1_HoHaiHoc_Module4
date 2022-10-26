@@ -66,6 +66,27 @@ public class BookController {
         return "/view";
     }
 
+
+    @GetMapping("/pay/{id}")
+    public String showPayForm(@PathVariable int id, Model model) throws EnoughBookException {
+        Book book = iBookService.findById(id);
+
+        if (book.getAmount() == book.getBookTotal()){
+            throw  new EnoughBookException();
+        }
+        else {
+            book.setAmount(book.getAmount() + 1);
+            iBookService.save(book);
+            return "redirect:/";
+        }
+
+    }
+    @ExceptionHandler(EnoughBookException.class)
+    public String showEnoughBookExcetion(){
+        return "/enoughBook";
+
+    }
+
     @GetMapping("/borrow/{id}")
     public String showBorrowForm(@PathVariable int id , Model model) throws NoMoreBookException {
         Book book = iBookService.findById(id);
@@ -83,24 +104,5 @@ public class BookController {
     }
 
 
-    @GetMapping("/pay/{id}")
-    public String showPayForm(@PathVariable int id, Model model) throws EnoughBookException {
-        Book book = iBookService.findById(id);
-
-        if (book.getAmount() == book.getBookTotal()){
-            throw  new EnoughBookException();
-        }
-        else {
-            book.setAmount(book.getAmount() + 1);
-            iBookService.save(book);
-            return "redirect:/";
-        }
-
-        }
-    @ExceptionHandler(EnoughBookException.class)
-    public String showEnoughBookExcetion(){
-        return "/enoughBook";
-
-    }
 
 }
