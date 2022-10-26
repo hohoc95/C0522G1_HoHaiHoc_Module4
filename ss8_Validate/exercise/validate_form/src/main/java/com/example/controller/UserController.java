@@ -32,8 +32,7 @@ public class UserController {
 
     @GetMapping("/create")
     public String showCreateForm(Model model) {
-        model.addAttribute("userList", iUserService.findAll());
-        model.addAttribute("user", new User());
+
         model.addAttribute("userDto", new UserDto());
         return "/create";
     }

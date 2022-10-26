@@ -31,8 +31,6 @@ public class SongController {
 
     @GetMapping("/create")
     public String showCreateForm(Model model) {
-        model.addAttribute("songList", iSongService.findAll());
-        model.addAttribute("song", new Song());
         model.addAttribute("songDto", new SongDto());
         return "/create";
     }
