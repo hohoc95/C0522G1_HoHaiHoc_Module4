@@ -4,6 +4,7 @@ import com.example.dto.BookDto;
 import com.example.exception.EnoughBookException;
 import com.example.exception.NoMoreBookException;
 import com.example.model.Book;
+import com.example.model.BookRental;
 import com.example.service.IBookRentalService;
 import com.example.service.IBookService;
 import org.springframework.beans.BeanUtils;
@@ -81,6 +82,7 @@ public class BookController {
         }
 
     }
+
     @ExceptionHandler(EnoughBookException.class)
     public String showEnoughBookExcetion(){
         return "/enoughBook";
