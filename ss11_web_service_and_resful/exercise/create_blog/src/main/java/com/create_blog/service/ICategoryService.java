@@ -9,7 +9,7 @@ public interface ICategoryService {
 
     void save(Category category);
 
-//    Category findById(int id);
+    Category findById(int id);
 
     void update(Category category);
 

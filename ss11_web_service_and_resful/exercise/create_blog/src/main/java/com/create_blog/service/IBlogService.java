@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IBlogService {
     List<Blog> findAll();
-    Page<Blog> findAll(Pageable pageable);
+//    Page<Blog> findAll(Pageable pageable);
     void save(Blog blog);
     void update(Blog blog);
     void remove(int id);

@@ -1,5 +1,6 @@
 package com.create_blog.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -8,7 +9,10 @@ public class BlogDto implements Validator {
     private String title;
     private String author;
     private String date;
+
     private String content;
+
+
 
     public BlogDto() {
     }

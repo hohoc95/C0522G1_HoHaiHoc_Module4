@@ -22,10 +22,10 @@ public class BlogService implements IBlogService {
         return iBlogRepository.findAll();
     }
     
-    @Override
-    public Page<Blog> findAll(Pageable pageable) {
-        return iBlogRepository.findAll(pageable);
-    }
+//    @Override
+//    public Page<Blog> findAll(Pageable pageable) {
+//        return iBlogRepository.findAll(pageable);
+//    }
 
     @Override
     public void save(Blog blog) {

@@ -23,10 +23,10 @@ public class CategoryService implements ICategoryService {
         iCategoryRepository.save(category);
     }
 
-//    @Override
-//    public Category findById(int id) {
-//        return iCategoryRepository.findById(id);
-//    }
+    @Override
+    public Category findById(int id) {
+        return iCategoryRepository.findById(id);
+    }
 
     @Override
     public void update(Category category) {
