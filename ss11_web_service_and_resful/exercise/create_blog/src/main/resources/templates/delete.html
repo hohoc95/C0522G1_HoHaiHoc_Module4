@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h3>Delete blog</h3>
+
+<a th:href="@{/}">Back to blog list</a>
+
+<form action="/delete" method="post" th:object="${blog}">
+    <table>
+        <tr>
+            <td><input type="hidden" th:field="*{id}" /></td>
+        </tr>
+
+        <tr>
+            <td>Title:</td>
+            <td><input type="text" th:field="*{title}" th:value="${blog.title}" /></td>
+        </tr>
+
+        <tr>
+            <td>Author:</td>
+            <td><input type="text" th:field="*{author}" th:value="${blog.author}"/></td>
+        </tr>
+
+        <tr>
+            <td>Date:</td>
+            <td>
+                <input type="date" th:field="*{date}" th:value="${blog.date}" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>Content:</td>
+            <td><textarea th:field="*{content}" th:value="${blog.content}"></textarea></td>
+        </tr>
+
+
+<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td>Category:</td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span th:if="${blog.category}" th:text="${blog.category.name}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span th:unless="${blog.category}">non</span><br>&ndash;&gt;-->
+<!--&lt;!&ndash;            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+
+    </table>
+
+    <button type="submit">Delete</button>
+</form>
+</body>
+</html>
