@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+    <link rel="stylesheet" href="/bootstrap413/css/bootstrap.css">
+</head>
+<body>
+<h1>Blog List</h1>
+<!--    Modal Create in here-->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalCreate">
+    Create
+</button>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <span>Loading...</span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!--    Modal in here-->
+<div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create List</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="input Title" id="txtTitle">
+                <input type="text" placeholder="input Author" id="txtAuthor">
+                <input type="text" placeholder="input Date" id="txtDate">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnCreate">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="jquery/jquery-3.5.1.min.js"></script>
+<script src="bootstrap413/js/bootstrap.js"></script>
+
+<script>
+    $(document).ready(function () { // kiểm tra DOM đã sẵn sàng chưa
+        function init() {
+            setTimeout(function () {
+                $("tbody").empty();
+                $.ajax({
+                    url: "http://localhost:8080/api/blog/v1",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data){
+                        let tr = [];
+                        for (let i = 0; i < data.length; i++){
+                            tr.push("<tr>")
+                            tr.push("<td>" + data[i].id + "</td>");
+                            tr.push("<td>" + data[i].title + "</td>");
+                            tr.push("<td>" + data[i].author + "</td>");
+                            tr.push("<td>" + data[i].date + "</td>");
+                            tr.push("</tr>")
+                        }
+                        $("tbody").append(tr.join(""))
+                    }
+                })
+
+            },2000);
+        }
+        $("#btnCreate").click(function (){
+            console.log("OK")
+            let txtTitle = $("#txtTitle").val();
+            let txtAuthor = $("#txtAuthor").val();
+            let txtDate = $("#txtDate").val();
+
+            $.ajax({
+                url: "http://localhost:8080/api/phone/v1",
+                type: "POST",
+                contentType:'aplication/json; charset=utf-8',
+                data: JSON.stringify({'title': txtTitle, 'author': txtAuthor, 'date': txtDate}),
+                success: function (){
+                    $("#modalCreate").modal('hide');
+                    $("tbody").empty();
+                    $("tbody").append("Loading...")
+                    init();
+                }
+            })
+        })
+
+        init();
+
+    })
+</script>
+</body>
+</html>
