@@ -27,13 +27,18 @@ public class CustomerController {
     @GetMapping("")
     public String showCustomerListAndSearch(@PageableDefault(value = 5) Pageable pageable,
                                             @RequestParam(defaultValue = "") String name,
+                                            String email,
                                             Model model) {
         System.out.println(name);
         model.addAttribute("customerList", iCustomerService.findByCustomerNameContaining(name, pageable));
         model.addAttribute("name", name);
+        model.addAttribute("email", email);
+        model.addAttribute("name", name);
 
         return "customer/list";
     }
+
+
     @GetMapping("/create")
     public String showFormCreateCustomer(Model model) {
         model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
@@ -97,7 +102,7 @@ public class CustomerController {
     @GetMapping("/delete/{id}")
     public String remove(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
         Customer customer = iCustomerService.findById(id);
-        customer.setDelete(false);
+        customer.setDelete(true);
         iCustomerService.save(customer);
         redirectAttributes.addFlashAttribute("mess","Delete successfull!");
         return "redirect:/customer";

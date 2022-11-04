@@ -12,6 +12,9 @@ public interface ICustomerService {
 //    Page<Customer> findAll(Pageable pageable);
     Page<Customer> findByCustomerNameContaining(String name , Pageable pageable);
 
+//    Page<Customer> searchCustomer(String nameSearch, String customerTypeSearch, String phoneSearch, Pageable pageable);
+
+
 
     void save(Customer customer);
     void update(Customer customer);
