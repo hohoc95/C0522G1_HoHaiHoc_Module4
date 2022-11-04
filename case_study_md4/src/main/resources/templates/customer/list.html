@@ -17,7 +17,7 @@
 
     <p style="color: green" th:text="${mess}"></p>
 
-    <table>
+    <table border="1">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -27,7 +27,7 @@
             <th>Phone</th>
             <th>Email</th>
             <th>Address</th>
-<!--            <th>Status</th>-->
+            <th>Status</th>
             <th>Edit</th>
             <th>Delete</th>
             <th>View</th>
@@ -43,6 +43,12 @@
             <td th:text="${customer.customerEmail}"></td>
             <td th:text="${customer.customerAddress}"></td>
 <!--            <td th:text="${customer.isDelete()}"></td>-->
+            <td th:if="${customer.isDelete()} == false">
+                Active
+            </td>
+            <td th:if="${customer.isDelete()} == true">
+                Passive
+            </td>
             <td><a th:href="@{/customer/edit/__${customer.customerId}__}">Edit</a></td>
             <td><a th:href="@{/customer/delete/__${customer.customerId}__}">Delete</a></td>
             <td><a th:href="@{/customer/view/__${customer.customerId}__}">View</a></td>

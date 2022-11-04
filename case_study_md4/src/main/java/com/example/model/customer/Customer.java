@@ -95,6 +95,7 @@ public class Customer {
         isDelete = delete;
     }
 
+
     public CustomerType getCustomerType() {
         return customerType;
     }

@@ -101,6 +101,7 @@ public class CustomerDto  implements Validator {
         isDelete = delete;
     }
 
+
     @Override
     public boolean supports(Class<?> clazz) {
         return false;

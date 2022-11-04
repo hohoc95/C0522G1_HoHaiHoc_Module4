@@ -11,7 +11,7 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
     List<Customer> findAll();
     Customer findById(int id);
 
-    @Query(value = "update customer set is_delete = 1 where id = :idKeyword ;" , nativeQuery = true)
-    void delete(@Param("idKeyword") int id);
+//    @Query(value = "update customer set is_delete = 1 where id = :idKeyword ;" , nativeQuery = true)
+//    void delete(@Param("idKeyword") int id);
 
 }
