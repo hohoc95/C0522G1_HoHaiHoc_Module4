@@ -95,9 +95,9 @@ public class CustomerController {
 */
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
+    public String remove(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
         Customer customer = iCustomerService.findById(id);
-        customer.setDelete(false);
+        customer.setDelete(true);
         iCustomerService.save(customer);
         redirectAttributes.addFlashAttribute("mess","Delete successfull!");
         return "redirect:/customer";
