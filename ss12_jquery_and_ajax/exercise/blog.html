@@ -1,106 +1,1202 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>List</title>-->
+<!--    <link rel="stylesheet" href="/bootstrap413/css/bootstrap.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Blog List</h1>-->
+<!--&lt;!&ndash;    Modal Create in here&ndash;&gt;-->
+<!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalCreate">-->
+<!--    Create-->
+<!--</button>-->
+<!--<table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Id</th>-->
+<!--        <th>Title</th>-->
+<!--        <th>Author</th>-->
+<!--        <th>Date</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--            <span>Loading...</span>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--&lt;!&ndash;    Modal in here&ndash;&gt;-->
+<!--<div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title">Create List</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true"></span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <input type="text" placeholder="input Title" id="txtTitle">-->
+<!--                <input type="text" placeholder="input Author" id="txtAuthor">-->
+<!--                <input type="text" placeholder="input Date" id="txtDate">-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                <button type="button" class="btn btn-primary" id="btnCreate">Save</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<script src="jquery/jquery-3.5.1.min.js"></script>-->
+<!--<script src="bootstrap413/js/bootstrap.js"></script>-->
+
+<!--<script>-->
+<!--    $(document).ready(function () { // kiểm tra DOM đã sẵn sàng chưa-->
+<!--        function init() {-->
+<!--            setTimeout(function () {-->
+<!--                $("tbody").empty();-->
+<!--                $.ajax({-->
+<!--                    url: "http://localhost:8080/api/blog/v1",-->
+<!--                    type: "GET",-->
+<!--                    dataType: "json",-->
+<!--                    success: function (data){-->
+<!--                        let tr = [];-->
+<!--                        for (let i = 0; i < data.length; i++){-->
+<!--                            tr.push("<tr>")-->
+<!--                            tr.push("<td>" + data[i].id + "</td>");-->
+<!--                            tr.push("<td>" + data[i].title + "</td>");-->
+<!--                            tr.push("<td>" + data[i].author + "</td>");-->
+<!--                            tr.push("<td>" + data[i].date + "</td>");-->
+<!--                            tr.push("</tr>")-->
+<!--                        }-->
+<!--                        $("tbody").append(tr.join(""))-->
+<!--                    }-->
+<!--                })-->
+
+<!--            },2000);-->
+<!--        }-->
+<!--        $("#btnCreate").click(function (){-->
+<!--            console.log("OK")-->
+<!--            let txtTitle = $("#txtTitle").val();-->
+<!--            let txtAuthor = $("#txtAuthor").val();-->
+<!--            let txtDate = $("#txtDate").val();-->
+
+<!--            $.ajax({-->
+<!--                url: "http://localhost:8080/api/phone/v1",-->
+<!--                type: "POST",-->
+<!--                contentType:'aplication/json; charset=utf-8',-->
+<!--                data: JSON.stringify({'title': txtTitle, 'author': txtAuthor, 'date': txtDate}),-->
+<!--                success: function (){-->
+<!--                    $("#modalCreate").modal('hide');-->
+<!--                    $("tbody").empty();-->
+<!--                    $("tbody").append("Loading...")-->
+<!--                    init();-->
+<!--                }-->
+<!--            })-->
+<!--        })-->
+
+<!--        init();-->
+
+<!--    })-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">-->
+<!--<head th:fragment="head">-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">-->
+<!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>-->
+<!--    <style>-->
+<!--        #slide{-->
+<!--            margin: 20px 0;-->
+<!--            background-color: lightgrey;-->
+<!--        }-->
+<!--        .hot-tour-text{-->
+<!--            text-align:center;-->
+<!--            padding:200px 20px 69px;-->
+<!--            background-color: lightgrey;-->
+<!--        }-->
+<!--        .hot-tour-text p{-->
+<!--            font-size:20px;-->
+<!--            text-transform:uppercase;-->
+<!--            margin-bottom:60px;-->
+<!--        }-->
+<!--        .hot-tour-text .btn{-->
+<!--            padding:11px 32px;-->
+<!--            font-size:18px;-->
+<!--            margin:8px 4px;-->
+<!--        }-->
+
+<!--        .hot-tour-text .btn-details{-->
+<!--            padding:11px 31px;-->
+<!--            background-color: darkgray;-->
+<!--            color: #f2f2f2;-->
+<!--        }-->
+<!--        .btn-details:hover{-->
+<!--            background-color: black;-->
+<!--            color: #f2f2f2;-->
+<!--        }-->
+<!--        .btn-orange,-->
+<!--        .btn-orange:focus{-->
+<!--            background:#faa61a;-->
+<!--            color:white;-->
+<!--        }-->
+
+<!--        .btn-orange:hover{-->
+<!--            background:#010101;-->
+<!--            color:white;-->
+<!--        }-->
+
+<!--        .hot-tour-text .hot-tour-title{-->
+<!--            font-size:55px;-->
+<!--            font-weight:100;-->
+<!--            margin-bottom:26px;-->
+<!--            line-height:1.25em;-->
+<!--        }-->
+<!--        .hotline-phone-ring-wrap {-->
+<!--            position: fixed;-->
+<!--            bottom: 0;-->
+<!--            left: 0;-->
+<!--            z-index: 999999;-->
+<!--        }-->
+
+<!--        .hotline-phone-ring {-->
+<!--            position: relative;-->
+<!--            visibility: visible;-->
+<!--            background-color: transparent;-->
+<!--            width: 110px;-->
+<!--            height: 110px;-->
+<!--            cursor: pointer;-->
+<!--            z-index: 11;-->
+<!--            -webkit-backface-visibility: hidden;-->
+<!--            -webkit-transform: translateZ(0);-->
+<!--            transition: visibility .5s;-->
+<!--            left: 0;-->
+<!--            bottom: 0;-->
+<!--            display: block;-->
+<!--        }-->
+
+<!--        .hotline-phone-ring-circle {-->
+<!--            width: 85px;-->
+<!--            height: 85px;-->
+<!--            top: 10px;-->
+<!--            left: 10px;-->
+<!--            position: absolute;-->
+<!--            background-color: transparent;-->
+<!--            border-radius: 100%;-->
+<!--            border: 2px solid #e60808;-->
+<!--            -webkit-animation: phonering-alo-circle-anim 1.2s infinite ease-in-out;-->
+<!--            animation: phonering-alo-circle-anim 1.2s infinite ease-in-out;-->
+<!--            transition: all .5s;-->
+<!--            -webkit-transform-origin: 50% 50%;-->
+<!--            -ms-transform-origin: 50% 50%;-->
+<!--            transform-origin: 50% 50%;-->
+<!--            opacity: 0.5;-->
+<!--        }-->
+
+<!--        .hotline-phone-ring-circle-fill {-->
+<!--            width: 55px;-->
+<!--            height: 55px;-->
+<!--            top: 25px;-->
+<!--            left: 25px;-->
+<!--            position: absolute;-->
+<!--            background-color: rgba(230, 8, 8, 0.7);-->
+<!--            border-radius: 100%;-->
+<!--            border: 2px solid transparent;-->
+<!--            -webkit-animation: phonering-alo-circle-fill-anim 2.3s infinite ease-in-out;-->
+<!--            animation: phonering-alo-circle-fill-anim 2.3s infinite ease-in-out;-->
+<!--            transition: all .5s;-->
+<!--            -webkit-transform-origin: 50% 50%;-->
+<!--            -ms-transform-origin: 50% 50%;-->
+<!--            transform-origin: 50% 50%;-->
+<!--        }-->
+
+<!--        .hotline-phone-ring-img-circle {-->
+<!--            background-color: #e60808;-->
+<!--            width: 33px;-->
+<!--            height: 33px;-->
+<!--            top: 37px;-->
+<!--            left: 37px;-->
+<!--            position: absolute;-->
+<!--            background-size: 20px;-->
+<!--            border-radius: 100%;-->
+<!--            border: 2px solid transparent;-->
+<!--            -webkit-animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;-->
+<!--            animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;-->
+<!--            -webkit-transform-origin: 50% 50%;-->
+<!--            -ms-transform-origin: 50% 50%;-->
+<!--            transform-origin: 50% 50%;-->
+<!--            display: -webkit-box;-->
+<!--            display: -webkit-flex;-->
+<!--            display: -ms-flexbox;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--        }-->
+
+<!--        .hotline-phone-ring-img-circle .pps-btn-img {-->
+<!--            display: -webkit-box;-->
+<!--            display: -webkit-flex;-->
+<!--            display: -ms-flexbox;-->
+<!--            display: flex;-->
+<!--        }-->
+
+<!--        .hotline-phone-ring-img-circle .pps-btn-img img {-->
+<!--            width: 20px;-->
+<!--            height: 20px;-->
+<!--        }-->
+
+<!--        .hotline-bar {-->
+<!--            position: absolute;-->
+<!--            background: rgba(230, 8, 8, 0.75);-->
+<!--            height: 40px;-->
+<!--            width: 180px;-->
+<!--            line-height: 40px;-->
+<!--            border-radius: 3px;-->
+<!--            padding: 0 10px;-->
+<!--            background-size: 100%;-->
+<!--            cursor: pointer;-->
+<!--            transition: all 0.8s;-->
+<!--            -webkit-transition: all 0.8s;-->
+<!--            z-index: 9;-->
+<!--            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.1);-->
+<!--            border-radius: 50px !important;-->
+<!--            /* width: 175px !important; */-->
+<!--            left: 33px;-->
+<!--            bottom: 37px;-->
+<!--        }-->
+
+<!--        .hotline-bar > a {-->
+<!--            color: #fff;-->
+<!--            text-decoration: none;-->
+<!--            font-size: 15px;-->
+<!--            font-weight: bold;-->
+<!--            text-indent: 50px;-->
+<!--            display: block;-->
+<!--            letter-spacing: 1px;-->
+<!--            line-height: 40px;-->
+<!--            font-family: Arial;-->
+<!--        }-->
+
+<!--        .hotline-bar > a:hover,-->
+<!--        .hotline-bar > a:active {-->
+<!--            color: #fff;-->
+<!--        }-->
+
+<!--        @-webkit-keyframes phonering-alo-circle-anim {-->
+<!--            0% {-->
+<!--                -webkit-transform: rotate(0) scale(0.5) skew(1deg);-->
+<!--                -webkit-opacity: 0.1;-->
+<!--            }-->
+<!--            30% {-->
+<!--                -webkit-transform: rotate(0) scale(0.7) skew(1deg);-->
+<!--                -webkit-opacity: 0.5;-->
+<!--            }-->
+<!--            100% {-->
+<!--                -webkit-transform: rotate(0) scale(1) skew(1deg);-->
+<!--                -webkit-opacity: 0.1;-->
+<!--            }-->
+<!--        }-->
+
+<!--        @-webkit-keyframes phonering-alo-circle-fill-anim {-->
+<!--            0% {-->
+<!--                -webkit-transform: rotate(0) scale(0.7) skew(1deg);-->
+<!--                opacity: 0.6;-->
+<!--            }-->
+<!--            50% {-->
+<!--                -webkit-transform: rotate(0) scale(1) skew(1deg);-->
+<!--                opacity: 0.6;-->
+<!--            }-->
+<!--            100% {-->
+<!--                -webkit-transform: rotate(0) scale(0.7) skew(1deg);-->
+<!--                opacity: 0.6;-->
+<!--            }-->
+<!--        }-->
+
+<!--        @-webkit-keyframes phonering-alo-circle-img-anim {-->
+<!--            0% {-->
+<!--                -webkit-transform: rotate(0) scale(1) skew(1deg);-->
+<!--            }-->
+<!--            10% {-->
+<!--                -webkit-transform: rotate(-25deg) scale(1) skew(1deg);-->
+<!--            }-->
+<!--            20% {-->
+<!--                -webkit-transform: rotate(25deg) scale(1) skew(1deg);-->
+<!--            }-->
+<!--            30% {-->
+<!--                -webkit-transform: rotate(-25deg) scale(1) skew(1deg);-->
+<!--            }-->
+<!--            40% {-->
+<!--                -webkit-transform: rotate(25deg) scale(1) skew(1deg);-->
+<!--            }-->
+<!--            50% {-->
+<!--                -webkit-transform: rotate(0) scale(1) skew(1deg);-->
+<!--            }-->
+<!--            100% {-->
+<!--                -webkit-transform: rotate(0) scale(1) skew(1deg);-->
+<!--            }-->
+<!--        }-->
+
+<!--        @media (max-width: 768px) {-->
+<!--            .hotline-bar {-->
+<!--                display: none;-->
+<!--            }-->
+<!--        }-->
+
+<!--        body {-->
+<!--            background-position: right bottom;-->
+<!--            background-repeat: no-repeat;-->
+<!--            background-size: 100%;-->
+<!--            height: 2032px;-->
+<!--            background-attachment: fixed;-->
+<!--        }-->
+
+<!--        .btn-top {-->
+<!--            background-repeat: no-repeat;-->
+<!--            border: medium none;-->
+<!--            bottom: 20px;-->
+<!--            cursor: pointer;-->
+<!--            display: none;-->
+<!--            height: 50px;-->
+<!--            outline: medium none;-->
+<!--            padding: 0;-->
+<!--            position: fixed;-->
+<!--            right: 20px;-->
+<!--            width: 50px;-->
+<!--            z-index: 9999;-->
+<!--        }-->
+
+<!--        section {-->
+<!--            background-color: #505050;-->
+<!--            height: 300px;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            background: linear-gradient(-->
+<!--                    rgba(0, 0, 0, 0.5),-->
+<!--                    rgba(0, 0, 0, 0.5)-->
+<!--            ),-->
+<!--            url(https://www.travelvietnam.com/images/photos/asia/vietnam-danang-furama-resort-danang-9.jpg?t=1591900492);-->
+<!--            background-size: 100%;-->
+<!--            height: 600px;-->
+<!--            position: inherit;-->
+<!--            margin-top: 150px;-->
+<!--        }-->
+
+<!--        .tieu_de {-->
+<!--            position: absolute;-->
+<!--            top: 60%;-->
+<!--            left: 50%;-->
+<!--            transform: translate(-50%, -50%);-->
+<!--            color: white;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        pre {-->
+<!--            text-transform: uppercase;-->
+<!--            font-family: Algerian;-->
+<!--        }-->
+
+<!--        nav {-->
+<!--            background-repeat: no-repeat;-->
+<!--            background-size: 100%;-->
+<!--            background-image: url("https://cdn.pixabay.com/photo/2021/07/06/19/26/drops-6392473__340.jpg");-->
+<!--            color: black;-->
+<!--        }-->
+
+<!--        header {-->
+<!--            background-repeat: no-repeat;-->
+<!--            background-size: 100%;-->
+<!--            background-image: url("https://1.bp.blogspot.com/&#45;&#45;_74qOdBzwQ/Xc28cZ6weBI/AAAAAAAAA1Y/pK5dpF5QD_klzyKPxGL3St-GXOm2pVWLwCLcBGAsYHQ/w1600/Valerii-Ilnitskii-wallpaper-1920x1080-2.png");-->
+<!--        }-->
+
+<!--        a {-->
+<!--            text-decoration: none;-->
+<!--        }-->
+
+<!--        a:hover {-->
+<!--            text-decoration: underline;-->
+<!--        }-->
+
+
+<!--        .col-2:hover {-->
+<!--            overflow: scroll;-->
+<!--            height: 520px;-->
+<!--        }-->
+
+<!--        .col-2 {-->
+<!--            overflow: auto;-->
+<!--        }-->
+
+<!--        input[type=text], input[type=email], input[type=number], input[type= date], textarea, select {-->
+<!--            width: 100%;-->
+<!--            padding: 12px 0px;-->
+<!--            margin: 8px 0;-->
+<!--            display: inline-block;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        #form {-->
+<!--            width: 40%;-->
+<!--            border-radius: 5px;-->
+<!--            background-color: #f2f2f2;-->
+<!--            padding: 20px;-->
+<!--            margin-top: 20px;-->
+<!--            margin-left: 30%;-->
+<!--            margin-bottom: 30px;-->
+<!--        }-->
+
+<!--        input[type=submit] {-->
+<!--            background-color: #22ff00;-->
+<!--            width: 100px;-->
+<!--            height: 40px;-->
+<!--            border-radius: 5px;-->
+<!--            margin-top: 10px;-->
+<!--        }-->
+
+<!--        #save:hover {-->
+<!--            color: #22ff00;-->
+<!--            background-color: red;-->
+<!--        }-->
+
+
+<!--        table {-->
+<!--            background-color: skyblue;-->
+<!--        }-->
+
+
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="container-fluid">-->
+<!--    <header class="row fixed-top" style="background-color:red; height: 100px; position: fixed" th:fragment="head">-->
+<!--        <div style="margin: 30px;overflow-y: hidden;overflow-x: hidden" class="col-2">-->
+<!--            <img src="https://www.furama.com/images/LOGOFHI_4C_Reverse.png" height="50px" alt="">-->
+<!--        </div>-->
+<!--        <div class="col-lg-7">-->
+<!--            <img src="https://furamavietnam.com/wp-content/uploads/2019/02/Ariyana-Tourism-Complex-02-2.png"-->
+<!--                 height="100 " alt="">-->
+<!--        </div>-->
+<!--    </header>-->
+<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light row fixed-top" style="margin-top: 100px"-->
+<!--         th:fragment="head">-->
+<!--        <div class="container-fluid text-center" style="margin: 0 10px;">-->
+<!--            <a class="navbar-brand " th:href="@{/}">HOME</a>-->
+<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"-->
+<!--                    data-bs-target="#navbarSupportedContent"-->
+<!--                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse " id="navbarSupportedContent">-->
+<!--                <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                    <li class="nav-item dropdown">-->
+<!--                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"-->
+<!--                           aria-expanded="false">-->
+<!--                            Customer-->
+<!--                        </a>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li><a class="dropdown-item" th:href="@{/customer}">Customer List</a></li>-->
+<!--                            <li>-->
+<!--                                <hr class="dropdown-divider">-->
+<!--                            </li>-->
+<!--                            <li><a class="dropdown-item" th:href="@{/customer/create}">Add new Customer</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item dropdown">-->
+<!--                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"-->
+<!--                           aria-expanded="false">-->
+<!--                            Employee-->
+<!--                        </a>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li><a class="dropdown-item" th:href="@{/employee}">Employee List</a></li>-->
+<!--                            <li>-->
+<!--                                <hr class="dropdown-divider">-->
+<!--                            </li>-->
+<!--                            <li><a class="dropdown-item" th:href="@{/employee/create}">Add new Employee</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item dropdown">-->
+<!--                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"-->
+<!--                           aria-expanded="false">-->
+<!--                            Service-->
+<!--                        </a>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li><a class="dropdown-item" th:href="@{/facility}">Facility List</a></li>-->
+<!--                            <li>-->
+<!--                                <hr class="dropdown-divider">-->
+<!--                            </li>-->
+<!--                            <li><a class="dropdown-item" th:href="@{/facility/create}">Add new Employee</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item dropdown">-->
+<!--                        <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"-->
+<!--                           aria-expanded="false">-->
+<!--                            Contract-->
+<!--                        </a>-->
+<!--                        <ul class="dropdown-menu">-->
+<!--                            <li><a class="dropdown-item" th:href="@{/contract}">Contract List</a></li>-->
+<!--                            <li>-->
+<!--                                <hr class="dropdown-divider">-->
+<!--                            </li>-->
+<!--                            <li><a class="dropdown-item" th:href="@{/contract/add}">Add new Contract</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </nav>-->
+<!--    <div class="container">-->
+<!--        <div class="tieu_de">-->
+<!--            <h1><pre>A CULINARY RESORT <ON></ON>-->
+<!--        ONE OF THE SIX MOST LUXURIOU BEACHES IN THE WORLD</pre>-->
+<!--            </h1>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row" style="margin: 20px 80px">-->
+<!--        <div class="col-6">-->
+<!--            <div class="row">-->
+<!--                Overlooking the long stretch of wide white sand on Danang Beach, Furama Resort Danang is a gateway to-->
+<!--                three-->
+<!--                World Heritage Sites of Hoi An (20 minutes), My Son (90 minutes) and Hue (2 hours). The 198 rooms and-->
+<!--                suites-->
+<!--                plus 70 two to four bedroom pool villas feature tasteful décor, designed with traditional Vietnamese-->
+<!--                style-->
+<!--                and a-->
+<!--                touch of French colonial architecture and guarantee the Vietnam’s the most prestigious resort -counting-->
+<!--                royalty,-->
+<!--                presidents, movie stars and international business leaders among its celebrity guests.-->
+<!--            </div>-->
+<!--            <div class="row" style="margin-top:50px ">-->
+<!--                <b>-->
+<!--          <pre style="font-size: 20px;font-family: 'Times New Roman';color: chartreuse">-->
+<!--              THIS WORLD CLASS RESORT, FURAMA DANANG,-->
+<!--        REPUTABLE FOR BEING A CULINARY RESORT IN VIETNAM</pre>-->
+<!--                </b>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--        <div class="col-6">-->
+<!--            <img src="https://alovoucher.com/wp-content/uploads/2018/03/Furama-Resort-Danang-0.jpg" height="480">-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--    <div class="row" style="margin: 50px 80px">-->
+<!--        <div class="col-6">-->
+<!--            <img src="https://furamavietnam.com/wp-content/uploads/2018/07/CULIRARY.jpg" height="400">-->
+<!--        </div>-->
+<!--        <div class="col-6">-->
+<!--            <div class="row" style="color: goldenrod;font-family: 'Times New Roman';font-size: 40px">-->
+<!--                CULINARY-->
+<!--            </div>-->
+<!--            <div class="row">-->
+
+<!--                The resort’s culinary experience features a mixture of the authentic and locally inspired Vietnamese,-->
+<!--                Asian,-->
+<!--                Italian and other European cuisines plus the best imported steaks. The resort presents guests with-->
+<!--                varied-->
+<!--                gastronomic venues – the hip and breezy bar overlooking the beach, the exclusive Lagoon pool surrounded-->
+<!--                by a-->
+<!--                tropical garden, the true Italian flare offered at the Don Cipriani’s, the refined Asian touch at Café-->
+<!--                Indochine or the authentic central Vietnam cuisine at the Danaksara.-->
+
+
+<!--            </div>-->
+<!--            <div class="row" style="margin-top:50px ">-->
+<!--                <b>-->
+<!--          <pre style="font-size: 20px;font-family: 'Times New Roman';color:red">-->
+<!--              THIS WORLD CLASS RESORT, FURAMA DANANG,-->
+<!--        REPUTABLE FOR BEING A CULINARY RESORT IN VIETNAM</pre>-->
+<!--                </b>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row" style="margin: 20px 80px">-->
+<!--        <div class="col-6">-->
+<!--            <div class="row" style="color: goldenrod;font-family: 'Times New Roman';font-size: 40px">-->
+<!--                RECREATION-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                A full range of Water Sports will keep you busy. Stop by the Water Sport House where our experienced-->
+<!--                staff-->
+<!--                are waiting to assist or train you in the use of any of our equipment.-->
+<!--            </div>-->
+<!--            <div class="row" style="margin-top:50px ">-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--        <div class="col-6">-->
+<!--            <img src="https://www.travelvietnam.com/images/photos/asia/vietnam-danang-furama-resort-danang-14.jpg?t=1591900492"-->
+<!--                 height="400">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;================ HOT-TOUR ==============&ndash;&gt;-->
+<!--    <div class="row" id="slide">-->
+<!--        <div id="carouselExampleFade" class="carousel slide carousel-fade col-12 col-md-6 col-lg-8"-->
+<!--             data-bs-ride="carousel">-->
+<!--            <div class="carousel-inner">-->
+<!--                <div class="carousel-item active">-->
+<!--                    <img src="https://furamavietnam.com/wp-content/uploads/2018/11/Vietnam_Danang_Furama_Resort_Exterior_Courtyard.jpg"-->
+<!--                         height="600" class="d-block w-100" alt="...">-->
+<!--                </div>-->
+<!--                <div class="carousel-item">-->
+<!--                    <img src="https://furamavietnam.com/wp-content/uploads/2018/11/Vietnam_Danang_Furama_Ocean-Studio-Suite.jpg"-->
+<!--                         height="600" class="d-block w-100" alt="...">-->
+<!--                </div>-->
+<!--                <div class="carousel-item">-->
+<!--                    <img src="https://images.alphacoders.com/269/269623.jpg" height="600" class="d-block w-100"-->
+<!--                         alt="...">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"-->
+<!--                    data-bs-slide="prev">-->
+<!--                <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                <span class="visually-hidden">Previous</span>-->
+<!--            </button>-->
+<!--            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"-->
+<!--                    data-bs-slide="next">-->
+<!--                <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                <span class="visually-hidden">Next</span>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--        <div class="col-sm-12 col-md-12 col-lg-4 hot-tour-text">-->
+<!--            <h3>Hot Offer</h3>-->
+<!--            <h2 class="hot-tour-title">Resort Services</h2>-->
+<!--            <p>2300$ / 2 Persons / 7 Nights</p>-->
+<!--            <a href="#" class="btn btn-orange">Book Now</a>-->
+<!--            <a href="#" class="btn btn-details">See Details</a>-->
+<!--        </div>&lt;!&ndash; end columns &ndash;&gt;-->
+
+<!--    </div>-->
+
+<!--    &lt;!&ndash;======================= FOOTER =======================&ndash;&gt;-->
+<!--    <section id="footer" class=" container-fluid ftr-heading-w ftr-heading-mgn-2">-->
+<!--        <div id="footer-top" class="banner-padding ftr-top-grey ftr-text-grey">-->
+<!--            <div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 footer-widget ftr-about ftr-our-company"-->
+<!--                         style="margin: 50px">-->
+<!--                        <h3 class="footer-heading text-light" style="font-family: 'Merriweather', serif">OUR RESORT</h3>-->
+<!--                        <p style="color: #f2f2f2">The Furama Resort aims to make your stay in Vietnam a unique and-->
+<!--                            unforgettable experience.-->
+<!--                            Whether you prefer to be active or just to relax, we offer a wide range of activities and-->
+<!--                            services to suit your needs.</p>-->
+<!--                        <ul class="social-links list-inline list-unstyled d-flex">-->
+<!--                            <li><a href="#"><span style="margin: 15px"><i class="fa-brands fa-facebook"></i></span></a>-->
+<!--                            </li>-->
+<!--                            <li><a href="#"><span style="margin: 15px"><i-->
+<!--                                    class="fa-brands fa-square-twitter"></i> </span></a></li>-->
+<!--                            <li><a href="#"><span style="margin: 15px"><i class="fa-brands fa-google-plus-g"></i></span></a>-->
+<!--                            </li>-->
+<!--                            <li><a href="#"><span style="margin: 15px"><i class="fa-brands fa-pinterest"></i></span></a>-->
+<!--                            </li>-->
+<!--                            <li><a href="#"><span style="margin: 15px"><i class="fa-brands fa-instagram"></i></span></a>-->
+<!--                            </li>-->
+<!--                            <li><a href="#"><span style="margin: 15px"><i class="fa-brands fa-linkedin"></i></span></a>-->
+<!--                            </li>-->
+<!--                            <li><a href="#"><span style="margin: 15px"><i class="fa-brands fa-youtube"></i></span></a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>&lt;!&ndash; end columns &ndash;&gt;-->
+<!--                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 footer-widget ftr-map">-->
+<!--                        <div class="map" style="margin: 50px">-->
+<!--                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7893.695429761798!2d108.24567688688009!3d16.040109018154816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420fdbc8cc38ef%3A0x9a6a3e31121225d2!2sFurama%20Resort%20Danang!5e0!3m2!1svi!2s!4v1665627939056!5m2!1svi!2s"-->
+<!--                                    width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"-->
+<!--                                    referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+<!--                        </div>-->
+<!--                    </div>&lt;!&ndash; end columns &ndash;&gt;-->
+<!--                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin-top:100px">-->
+<!--                        <span style="font-family:'Merriweather', serif;color: #f2f2f2;font-size: 20px;"><svg-->
+<!--                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
+<!--                                class="bi bi-geo-alt" viewBox="0 0 16 16">-->
+<!--  <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>-->
+<!--  <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>-->
+<!--</svg> Furama Resort Danang, Vo Nguyen Giap, Khue My, Ngu Hanh Son, Da Nang</span>-->
+<!--                    </div>-->
+
+<!--                </div>&lt;!&ndash; end row &ndash;&gt;-->
+<!--            </div>&lt;!&ndash; end container &ndash;&gt;-->
+<!--        </div>&lt;!&ndash; end footer-top &ndash;&gt;-->
+<!--    </section>&lt;!&ndash; end footer &ndash;&gt;-->
+<!--    <div class="hotline-phone-ring-wrap">-->
+<!--        <div class="hotline-phone-ring">-->
+<!--            <div class="hotline-phone-ring-circle"></div>-->
+<!--            <div class="hotline-phone-ring-circle-fill"></div>-->
+<!--            <div class="hotline-phone-ring-img-circle">-->
+<!--                <a href="tel:0389922342" class="pps-btn-img">-->
+<!--                    <img src="https://nguyenhung.net/wp-content/uploads/2019/05/icon-call-nh.png" alt="Gọi điện thoại"-->
+<!--                         width="50">-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="hotline-bar">-->
+<!--            <a href="tel:0389922342">-->
+<!--                <span class="text-hotline">0326.820.571</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<a class="btn-top" href="javascript:void(0);" title="Top" style="display: inline;"-->
+<!--&gt;-->
+<!--    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"-->
+<!--         class="bi bi-airplane-engines-fill" viewBox="0 0 16 16">-->
+<!--        <path d="M8 0c-.787 0-1.292.592-1.572 1.151A4.347 4.347 0 0 0 6 3v3.691l-2 1V7.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.191l-1.17.585A1.5 1.5 0 0 0 0 10.618V12a.5.5 0 0 0 .582.493l1.631-.272.313.937a.5.5 0 0 0 .948 0l.405-1.214 2.21-.369.375 2.253-1.318 1.318A.5.5 0 0 0 5.5 16h5a.5.5 0 0 0 .354-.854l-1.318-1.318.375-2.253 2.21.369.405 1.214a.5.5 0 0 0 .948 0l.313-.937 1.63.272A.5.5 0 0 0 16 12v-1.382a1.5 1.5 0 0 0-.83-1.342L14 8.691V7.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v.191l-2-1V3c0-.568-.14-1.271-.428-1.849C9.292.591 8.787 0 8 0Z"/>-->
+<!--    </svg>-->
+<!--</a>-->
+<!--</body>-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--<script>-->
+<!--    jQuery(document).ready(function ($) {-->
+<!--        if ($(".btn-top").length > 0) {-->
+<!--            $(window).scroll(function () {-->
+<!--                var e = $(window).scrollTop();-->
+<!--                if (e > 300) {-->
+<!--                    $(".btn-top").show()-->
+<!--                } else {-->
+<!--                    $(".btn-top").hide()-->
+<!--                }-->
+<!--            });-->
+<!--            $(".btn-top").click(function () {-->
+<!--                $('body,html').animate({-->
+<!--                    scrollTop: 0-->
+<!--                })-->
+<!--            })-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--</html>-->
+<!--</html>-->
+
+<!--<html>-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">-->
+<!--    <title>Home</title>-->
+<!--    <style>-->
+<!--        .header {-->
+<!--            background-image: url("https://wallpaperaccess.com/full/556423.gif");-->
+<!--        }-->
+<!--        a {-->
+<!--            text-decoration: none;-->
+<!--        }-->
+<!--        a:hover {-->
+<!--            text-decoration: underline;-->
+<!--        }-->
+<!--        .footer {-->
+<!--            bottom: 0;-->
+<!--            background-image: url("https://wallpaperaccess.com/full/644233.jpg");-->
+<!--        }-->
+<!--        .left {-->
+<!--            overflow: hidden;-->
+<!--            height: 520px;-->
+<!--        }-->
+<!--        .body {-->
+<!--            background-image: url("https://wallpaperaccess.com/full/1206292.jpg");-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container-fluid bg-gray-500 d-flex header" style="height: 100px">-->
+<!--    <img class="h-100 p-4" src="https://www.furama.com/images/LOGOFurama_4C_Normal.png" alt="">-->
+<!--    <img class="ms-5 ps-5" src="https://furamavietnam.com/wp-content/uploads/2019/02/Ariyana-Tourism-Complex-02-2.png"-->
+<!--         alt="">-->
+
+
+<!--</div>-->
+
+<!--<nav class="navbar navbar-expand-lg bg-light">-->
+<!--    <div class="container-fluid mx-5">-->
+<!--        <a class="navbar-brand font-weight-bold" href="/">Home</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"-->
+<!--                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                <li class="nav-item dropdown ms-3">-->
+<!--                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"-->
+<!--                       aria-expanded="false">Employee</a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="/employee">Employee list</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/employee?action=create">Add new Employee</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item dropdown ms-3">-->
+<!--                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"-->
+<!--                       aria-expanded="false">Customer</a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="/customer">Customer list</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/customer?action=create">Add new Customer</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item dropdown ms-3">-->
+<!--                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"-->
+<!--                       aria-expanded="false">Service</a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="/facility">Facility list</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/facility?action=create">Add new Facility</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item dropdown ms-3">-->
+<!--                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"-->
+<!--                       aria-expanded="false">Contract</a>-->
+<!--                    <ul class="dropdown-menu">-->
+<!--                        <li><a class="dropdown-item" href="/contract">Contract list</a></li>-->
+<!--                        <li><a class="dropdown-item" href="/contract?action=create">Add new Contract</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--            </ul>-->
+
+<!--            <form class="d-flex my-2" role="search">-->
+<!--                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success" type="submit">-->
+<!--                    <i class="fa-solid fa-magnifying-glass"></i></button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<!--<div class="container-fluid body" style="height: 520px">-->
+<!--    <div class="row mx-3">-->
+<!--        <div class="col-4 left">-->
+<!--            <p style="text-align: center;font-size: xx-large">-->
+<!--                KHU NGHỈ DƯỠNG ĐẲNG CẤP THẾ GIỚI FURAMA ĐÀ NẴNG, TỰ HÀO LÀ KHU NGHỈ DƯỠNG ẨM THỰC TẠI VIỆT NAM-->
+<!--            </p>-->
+
+<!--            <p class="para">-->
+<!--                Hướng ra bãi biển Đà Nẵng trải dài cát trắng, Furama Resort Đà Nẵng là cửa ngõ đến với 3 di sản văn hoá thế giới: Hội An (20 phút), Mỹ Sơn (90 phút) và Huế (2 tiếng. 196 phòng hạng sang cùng với 70 căn biệt thự từ hai đến bốn phòng ngủ có hồ bơi riêng đều được trang trí trang nhã, theo phong cách thiết kế truyền thống của Việt Nam và kiến trúc thuộc địa của Pháp, biến Furama thành khu nghỉ dưỡng danh giá nhất tại Việt Nam – vinh dự được đón tiếp nhiều người nổi tiếng, giới hoàng gia, chính khách, ngôi sao điện ảnh và các nhà lãnh đạo kinh doanh quốc tế.-->
+<!--            </p>-->
+<!--        </div>-->
+
+<!--        <div class="col-8">-->
+<!--            <img class="img-fluid mt-4 ms-2 border border-4 border-light" src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/62371531.jpg?k=fb1828d64f739b526944dcb487699e4625ad8799986e0e4ef5c2c930dcf39b6c&o=&hp=1" alt="">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="container-fluid text-center footer" style="height: 50px">-->
+<!--    <p class="text-light pt-2">&copy;FURAMA - officially operated in 1997.</p>-->
+<!--</div>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>List</title>
-    <link rel="stylesheet" href="/bootstrap413/css/bootstrap.css">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>FURAMA</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+    <style>
+        .header {
+            /*background-image: url("https://i.pinimg.com/originals/86/41/6d/86416d71cbd1e608a5304bb92fc235ea.png");*/
+            /*background-image: url("https://griddl.co/wp-content/uploads/2020/07/griddl-overdose-lifeline.gif");*/
+            /*background-image: url("https://i.pinimg.com/originals/c7/1b/e0/c71be0510bb255fa135f19aa25a07fa7.gif");*/
+            background-image: url("https://wallpapersmug.com/download/1920x1080/4d7d03/light-colors-geometric-pattern-abstract.jpg");
+            /*background-image: url("https://armourroofinc.com/_images/thunder-1900.gif");*/
+        }
+
+        a {
+            text-decoration: none;
+            color: #bad8ff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #bad8ff;
+        }
+
+        .formCSS {
+            background-image: url("https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000");
+        }
+
+        .modalCSS {
+            background-image: url("https://images.unsplash.com/photo-1607513746994-51f730a44832?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb");
+        }
+
+        body {
+            /*background-image: url("https://images.hdqwalls.com/download/dark-space-minimal-art-4k-ll-2560x1440.jpg");*/
+            background-image: url("https://cutewallpaper.org/27/black-wallpaper-iphone-gif/pin-on-things.gif");
+            /*background-image: url("https://www.bimbaylola.mx/on/demandware.static/-/Library-Sites-byl-shared-library/default/dw12dfb3d9/brand-thisiscosmic/desktop/fondo-estrellas.gif");*/
+        }
+
+        input:invalid {
+            border: 1px solid red;
+        }
+
+        input:valid {
+            border: 1px solid green;
+        }
+
+        .zoom:hover {
+            transform: scale(1.6);
+        }
+    </style>
 </head>
 <body>
-<h1>Blog List</h1>
-<!--    Modal Create in here-->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalCreate">
-    Create
-</button>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            <span>Loading...</span>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<!--    Modal in here-->
-<div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Create List</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"></span>
+<header th:fragment="header" class="sticky-top">
+    <div class="container-fluid bg-gray-500 d-flex header" style="height: 100px">
+        <img class="h-100 p-4" src="https://www.furama.com/images/LOGOFurama_4C_Normal.png" alt="">
+        <img class="ms-5 ps-5"
+             src="https://furamavietnam.com/wp-content/uploads/2019/02/Ariyana-Tourism-Complex-02-2.png"
+             alt="">
+
+        <div class="container-fluid text-end my-4 me-4">
+            <div sec:authorize="isAuthenticated()">
+            <span class="mt-3" style="font-size: 15px">
+                    <strong sec:authentication="principal.username"></strong>
+            </span>
+
+                <a th:href="@{/logout}">
+                    <button class="btn btn-danger btn-outline-secondary text-light">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                    </button>
+                </a>
+            </div>
+
+            <a th:href="@{/login}" sec:authorize="!isAuthenticated()">
+                <button class="btn btn-success btn-outline-secondary text-light">
+                    <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
                 </button>
+            </a>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid mx-5">
+            <a class="navbar-brand font-weight-bold" th:href="@{/}">
+                <i class="fa-solid fa-house-chimney h5 mx-1"></i> Trang chủ
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!--                    <li class="nav-item dropdown ms-3" sec:authorize="hasRole('ADMIN')">-->
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">Nhân viên</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/employee}">Danh sách nhân viên</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" th:href="@{/employee/create}">Thêm nhân viên mới</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">Khách hàng</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/customer}">Danh sách khách hàng</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" th:href="@{/customer/create}">Thêm khách hàng mới</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">Dịch vụ</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/facility}">Danh sách dịch vụ</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" th:href="@{/facility/create}">Thêm dịch vụ mới</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">Hợp đồng</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/contract}">Danh sách hợp đồng</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal"
+                                   data-bs-target="#addContract">Thêm hợp đồng mới</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <div class="modal-body">
-                <input type="text" placeholder="input Title" id="txtTitle">
-                <input type="text" placeholder="input Author" id="txtAuthor">
-                <input type="text" placeholder="input Date" id="txtDate">
+        </div>
+    </nav>
+</header>
+
+<div class="container-fluid" style="height: 480px">
+    <div class="row mx-3 pt-3">
+        <div class="col-2">
+            <img class="img-fluid mt-5"
+                 src="https://furamavietnam.com/wp-content/uploads/2018/10/logo.png" alt="">
+        </div>
+
+        <div class="col-10">
+            <img class="img-fluid mt-4 ms-2 border border-4 border-secondary"
+                 src="http://ngocdiep.vn/wp-content/uploads/2020/12/4.flamigo-cat-ba.jpg" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-5">
+    <div class="mt-3 mb-3">
+        <span class="h4 text-light">KHÔNG NGỪNG KIẾN TẠO GIÁ TRỊ MỚI!</span>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-6">
+            <video class="img-fluid" autoplay muted>
+                <source type="video/mp4"
+                        src="https://eus-streaming-video-rt-microsoft-com.akamaized.net/a78db3a2-57da-4003-a36b-93006f422299/cf0c290f-39a0-48b5-b9a8-4e0dce7830e2.mp4">
+            </video>
+        </div>
+
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card shadow container-fluid bg-secondary" style="width: 20rem;">
+                        <img src="https://phulong.com/UploadFiles/Images/FURAMA%2020%20NAM.jpg"
+                             class="card-img-top mt-3" alt="">
+
+                        <div class="card-body">
+                            <a class="link-light h4">FURAMA ></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card shadow container-fluid bg-secondary" style="width: 20rem;">
+                        <img src="https://cdn.cet.edu.vn/wp-content/uploads/2019/02/villa-khong-gian-sang-trong.jpg"
+                             class="card-img-top mt-3" alt="">
+
+                        <div class="card-body">
+                            <a class="link-light h4">Villa ></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btnCreate">Save</button>
+
+            <div class="row mt-5 pt-3">
+                <div class="col-6">
+                    <div class="card shadow container-fluid bg-secondary" style="width: 20rem;">
+                        <img src="https://images.adsttc.com/media/images/5ecd/d4ac/b357/65c6/7300/009d/large_jpg/02C.jpg?1590547607"
+                             class="card-img-top mt-3" alt="">
+
+                        <div class="card-body">
+                            <a class="link-light h4">House ></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card shadow container-fluid bg-secondary" style="width: 20rem;">
+                        <img src="https://www.thespruce.com/thmb/0mCrVrlgAOLHm03zxtJxMd8RIwQ=/2048x1365/filters:fill(auto,1)/put-together-a-perfect-guest-room-1976987-hero-223e3e8f697e4b13b62ad4fe898d492d.jpg"
+                             class="card-img-top mt-3" alt="">
+
+                        <div class="card-body">
+                            <a class="link-light h4">Room ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p class="text-light h5 mb-2">TOP KHÁCH HÀNG tháng 10/2022</p>
+
+    <div class="container-fluid">
+        <div class="row mx-3">
+            <div class="col-2">
+                <p class="ms-2 mt-2 text-light">1. Hồ Thị Thủy Lợi</p>
+                <img class="img-fluid zoom border border-danger border-2 mb-2"
+                     src="https://andy.codegym.vn/storage/images/avatars/fe4ef841c2aa37ea4058a39b62342083.jpeg"
+                     alt="">
+            </div>
+
+            <div class="col-2">
+                <p class="ms-2 mt-2 text-light">2. Phạm Đạt</p>
+                <img class="img-fluid zoom border border-warning border-2 mb-2"
+                     src="https://andy.codegym.vn/storage/images/avatars/ed8e5cd27c9b6e42aff7348d37df70ca.jpeg"
+                     alt="">
+            </div>
+
+            <div class="col-2">
+                <p class="ms-2 mt-2 text-light">3. Nguyễn Duy Quyết</p>
+                <img class="img-fluid zoom border border-danger border-2 mb-2"
+                     src="https://andy.codegym.vn/storage/images/avatars/593ce0d360800a9305a85f23f2ed7a06.jpeg" alt="">
+            </div>
+
+            <div class="col-2">
+                <p class="ms-2 mt-2 text-light">4. Huỳnh Văn Nam</p>
+                <img class="img-fluid zoom border border-warning border-2 mb-2"
+                     src="https://andy.codegym.vn/storage/images/avatars/4b22363302c221ade7b15b2e723febea.jpeg"
+                     alt="">
+            </div>
+
+            <div class="col-2">
+                <p class="ms-2 mt-2 text-light">5. Nguyễn Tấn Huân</p>
+                <img class="img-fluid zoom border border-danger border-2 mb-2"
+                     src="https://andy.codegym.vn/storage/images/avatars/e791353a34ddf7bdd5f3e0ce61db6108.jpeg" alt="">
+            </div>
+
+            <div class="col-2">
+                <p class="ms-2 mt-2 text-light">6. Hà Bảo Ân</p>
+                <img class="img-fluid zoom border border-warning border-2 mb-2"
+                     src="https://andy.codegym.vn/storage/images/avatars/701964623b31d1a5f4d07079c5d67e4a.jpeg" alt="">
             </div>
         </div>
     </div>
 </div>
-<script src="jquery/jquery-3.5.1.min.js"></script>
-<script src="bootstrap413/js/bootstrap.js"></script>
 
-<script>
-    $(document).ready(function () { // kiểm tra DOM đã sẵn sàng chưa
-        function init() {
-            setTimeout(function () {
-                $("tbody").empty();
-                $.ajax({
-                    url: "http://localhost:8080/api/blog/v1",
-                    type: "GET",
-                    dataType: "json",
-                    success: function (data){
-                        let tr = [];
-                        for (let i = 0; i < data.length; i++){
-                            tr.push("<tr>")
-                            tr.push("<td>" + data[i].id + "</td>");
-                            tr.push("<td>" + data[i].title + "</td>");
-                            tr.push("<td>" + data[i].author + "</td>");
-                            tr.push("<td>" + data[i].date + "</td>");
-                            tr.push("</tr>")
-                        }
-                        $("tbody").append(tr.join(""))
-                    }
-                })
-
-            },2000);
-        }
-        $("#btnCreate").click(function (){
-            console.log("OK")
-            let txtTitle = $("#txtTitle").val();
-            let txtAuthor = $("#txtAuthor").val();
-            let txtDate = $("#txtDate").val();
-
-            $.ajax({
-                url: "http://localhost:8080/api/phone/v1",
-                type: "POST",
-                contentType:'aplication/json; charset=utf-8',
-                data: JSON.stringify({'title': txtTitle, 'author': txtAuthor, 'date': txtDate}),
-                success: function (){
-                    $("#modalCreate").modal('hide');
-                    $("tbody").empty();
-                    $("tbody").append("Loading...")
-                    init();
-                }
-            })
-        })
-
-        init();
-
-    })
-</script>
+<footer th:fragment="footer">
+    <div class="container-fluid text-center footer mt-5" style="height: 50px">
+        <strong class="text-light pt-2">&copy;FURAMA - chính thức hoạt động từ năm 1997.</strong>
+    </div>
+</footer>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
 </html>

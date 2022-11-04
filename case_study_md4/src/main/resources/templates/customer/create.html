@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add customer</title>
+</head>
+<body>
+    <h3>Create new customer</h3>
+    <a th:href="@{/customer}">Back to customer list</a>
+
+    <form th:action="@{/customer/save}" method="post" th:object="${customerDto}">
+        <table>
+            <tr>
+                <td>Customer Name:</td>
+                <td>
+                    <input type="text" th:field="*{customerName}" />
+                    <p style="color: aqua"
+                       th:errors="*{customerName}"
+                       th:if="${#fields.hasErrors('customerName')}">
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Customer Day of Birth</td>
+                <td>
+                    <input type="text" th:field="*{customerDayOfBirth}">
+                    <p style="color: aqua"
+                       th:errors="*{customerDayOfBirth}"
+                       th:if="${#fields.hasErrors('customerDayOfBirth')}">
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Customer Gender</td>
+                <td>
+                    <input type="radio" th:field="*{customerGender}" value="1" /> Male
+                    <input type="radio" th:field="*{customerGender}" value="0" /> FeMale
+                    <input type="radio" th:field="*{customerGender}" value="2" /> LGBT
+                </td>
+            </tr>
+
+            <tr>
+                <td>Customer Id card</td>
+                <td>
+                    <input type="text" th:field="*{customerIdCard}">
+                    <p style="color: aqua"
+                       th:errors="*{customerIdCard}"
+                       th:if="${#fields.hasErrors('customerIdCard')}">
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Customer Phone</td>
+                <td><input type="text" th:field="*{customerPhone}"></td>
+            </tr>
+
+            <tr>
+                <td>Customer Email</td>
+                <td><input type="text" th:field="*{customerEmail}"></td>
+            </tr>
+            <tr>
+                <td>Customer Address</td>
+                <td><input type="text" th:field="*{customerAddress}"></td>
+            </tr>
+
+            <tr>
+                <td>Customer Type:</td>
+                <td>
+                    <select th:field="*{customerType}">
+                        <option th:each="item:${customerTypeList}" th:value="${item.customerTypeId}" th:text="${item.customerTypeName}"></option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <button type="submit">Save</button>
+    </form>
+
+<!--    <form action="/save" method="get" th:object="${customerDto}">-->
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <td>Customer Name</td>-->
+<!--                <td><input type="text" th:field="*{customerName}"></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <td>Customer Day of Birth</td>-->
+<!--                <td><input type="text" th:field="*{customerDayOfBirth}"></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <td>Customer Gender</td>-->
+<!--                <td>-->
+<!--                    <input type="radio" th:field="*{customerGender}" value="1" /> Male-->
+<!--                    <input type="radio" th:field="*{customerGender}" value="0" /> FeMale-->
+<!--                    <input type="radio" th:field="*{customerGender}" value="2" /> LGBT-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <td>Customer Id card</td>-->
+<!--                <td><input type="text" th:field="*{customerIdCard}"></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <td>Customer Phone</td>-->
+<!--                <td><input type="text" th:field="*{customerPhone}"></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <td>Customer Email</td>-->
+<!--                <td><input type="text" th:field="*{customerEmail}"></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Customer Address</td>-->
+<!--                <td><input type="text" th:field="*{customerAddress}"></td>-->
+<!--            </tr>-->
+
+<!--            <tr>-->
+<!--                <td>Customer Type:</td>-->
+<!--                <td>-->
+<!--                    <select th:field="*{customerType}">-->
+<!--                        <option th:each="item:${customerTypeList}" th:value="${item.customerTypeId}" th:text="${item.customerTypeName}"></option>-->
+<!--                    </select>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--        <button type="submit">Save</button>-->
+<!--    </form>-->
+</body>
+</html>

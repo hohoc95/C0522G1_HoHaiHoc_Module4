@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <a th:href="@{/customer/create}">Add new blog</a>
+
+
+    <form action="/">
+            <input type="text" name="name">
+            <button type="submit">Search</button>
+
+    </form>
+
+    <p style="color: green" th:text="${mess}"></p>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Day of birth</th>
+            <th>Gender</th>
+            <th>ID card</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+<!--            <th>Status</th>-->
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>View</th>
+        </tr>
+
+        <tr th:each="customer :${customerList}">
+            <td th:text="${customer.customerId}"></td>
+            <td th:text="${customer.customerName}"></td>
+            <td th:text="${customer.customerDayOfBirth}"></td>
+            <td th:text="${customer.customerGender}"></td>
+            <td th:text="${customer.customerIdCard}"></td>
+            <td th:text="${customer.customerPhone}"></td>
+            <td th:text="${customer.customerEmail}"></td>
+            <td th:text="${customer.customerAddress}"></td>
+<!--            <td th:text="${customer.isDelete()}"></td>-->
+            <td><a th:href="@{/customer/edit/__${customer.customerId}__}">Edit</a></td>
+            <td><a th:href="@{/customer/delete/__${customer.customerId}__}">Delete</a></td>
+            <td><a th:href="@{/customer/view/__${customer.customerId}__}">View</a></td>
+        </tr>
+
+    </table>
+
+<!--    <div>-->
+<!--        <a th:href="@{'/'(page=${customerList.number - 1}, name=${name})}" th:if="${customerList.hasPrevious()}">Trước</a>-->
+<!--        <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>-->
+<!--        <a th:href="@{'/'(page=${customerList.number + 1}, name=${name})}" th:if="${customerList.hasNext()}">Sau</a>-->
+<!--    </div>-->
+</body>
+</html>

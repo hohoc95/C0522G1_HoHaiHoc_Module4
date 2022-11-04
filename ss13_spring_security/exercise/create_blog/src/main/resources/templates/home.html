@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>Trang chủ</h1>
+
+<div sec:authorize="isAuthenticated()">
+    <h2>Bạn đã đăng nhập</h2>
+    <h2>Xin chào bạn:
+        <span style="color: lightcoral" sec:authentication="principal.username"></span>
+    </h2>
+
+    <div sec:authorize="hasRole('ADMIN')" style="color: lightblue">
+        <span>EDIT</span>
+        <span>CREATE</span>
+        <span>DELETE</span>
+    </div>
+
+    <div sec:authorize="hasRole('USER')" style="color: lightsalmon">
+        <span>VIEW</span>
+    </div>
+</div>
+</body>
+</html>

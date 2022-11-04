@@ -9,29 +9,52 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private MyUserDetailSevice myUserDetailSevice;
+    private MyUserDetailSevice userDetailSevice;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    // Cách lấy thông tin UserDetail và cơ chế mã hóa pass
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(myUserDetailSevice).passwordEncoder(passwordEncoder());
-
+        auth.userDetailsService(userDetailSevice)
+                .passwordEncoder(passwordEncoder());;
     }
+    // Cấu hình xác thực Http Basic và cơ chế phân quyền
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().disable()
+//                .formLogin()
+//                .defaultSuccessUrl("/blog").permitAll()
+//                .and().authorizeRequests().anyRequest().authenticated();
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .formLogin()
+                .loginPage("/login")
                 .defaultSuccessUrl("/blog").permitAll()
-                .and().authorizeRequests().anyRequest().authenticated();
+                .and()
+                .authorizeRequests()
+                .antMatchers("/create").hasAnyRole("ADMIN")
+                .anyRequest().authenticated();
+        http.authorizeRequests().and().rememberMe()
+                .tokenRepository(persistenceTokenRepository())
+                .tokenValiditySeconds(1*24*60*60);
+    }
+    @Bean
+    public PersistentTokenRepository persistenceTokenRepository(){
+        InMemoryTokenRepositoryImpl inMemoryTokenRepository = new InMemoryTokenRepositoryImpl();
+        return inMemoryTokenRepository;
     }
 }

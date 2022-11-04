@@ -11,7 +11,7 @@ public class CreateBlogApplication {
         SpringApplication.run(CreateBlogApplication.class, args);
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println(passwordEncoder.encode("11111"));
+        System.out.println(passwordEncoder.encode("123"));
     }
 
 }
