@@ -41,13 +41,13 @@ public class CustomerService implements ICustomerService {
         iCustomerRepository.save(customer);
     }
 
-    @Override
-    public void remove(int id) {
-        iCustomerRepository.deleteById(id);
-    }
+//    @Override
+//    public void remove(int id) {
+//        iCustomerRepository.deleteById(id);
+//    }
 
-    @Override
-    public void delete(int id) {
-        iCustomerRepository.delete(id);
-    }
+//    @Override
+//    public void delete(int id) {
+//        iCustomerRepository.delete(id);
+//    }
 }

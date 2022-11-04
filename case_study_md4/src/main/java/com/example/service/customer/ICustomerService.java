@@ -13,6 +13,6 @@ public interface ICustomerService {
 
     void save(Customer customer);
     void update(Customer customer);
-    void remove(int id);
-    void delete(int id);
+//    void remove(int id);
+//    void delete(int id);
 }
