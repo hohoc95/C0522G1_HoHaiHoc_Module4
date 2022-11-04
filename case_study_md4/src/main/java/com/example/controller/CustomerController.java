@@ -7,14 +7,12 @@ import com.example.service.customer.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -31,7 +29,9 @@ public class CustomerController {
                                             @RequestParam(defaultValue = "") String name,
                                             Model model) {
         System.out.println(name);
-        model.addAttribute("customerList", iCustomerService.findAll());
+        model.addAttribute("customerList", iCustomerService.findByCustomerNameContaining(name, pageable));
+        model.addAttribute("name", name);
+
         return "customer/list";
     }
     @GetMapping("/create")
@@ -97,7 +97,7 @@ public class CustomerController {
     @GetMapping("/delete/{id}")
     public String remove(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
         Customer customer = iCustomerService.findById(id);
-        customer.setDelete(true);
+        customer.setDelete(false);
         iCustomerService.save(customer);
         redirectAttributes.addFlashAttribute("mess","Delete successfull!");
         return "redirect:/customer";
