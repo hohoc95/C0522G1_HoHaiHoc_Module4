@@ -1,10 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit Facility</title>
 </head>
 <body>
+<h3>Edit Facility</h3>
+<a th:href="@{/facility}">Back to facility list</a>
+
+<form th:action="@{/facility/save}" method="post" th:object="${facilityDto}">
+    <table>
+
+        <tr>
+            <td><input type="hidden" th:field="*{facilityId}"/></td>
+
+        </tr>
+        <tr>
+            <td>Facility Name:</td>
+            <td>
+                <input type="text" th:field="*{facilityName}" />
+                <p style="color: aqua"
+                   th:errors="*{facilityName}"
+                   th:if="${#fields.hasErrors('facilityName')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Area:</td>
+            <td>
+                <input type="text" th:field="*{facilityArea}" />
+                <p style="color: aqua"
+                   th:errors="*{facilityArea}"
+                   th:if="${#fields.hasErrors('facilityArea')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Rent Cost:</td>
+            <td>
+                <input type="text" th:field="*{rentCost}" />
+                <p style="color: aqua"
+                   th:errors="*{rentCost}"
+                   th:if="${#fields.hasErrors('rentCost')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Max People:</td>
+            <td>
+                <input type="text" th:field="*{maxPeople}" />
+                <p style="color: aqua"
+                   th:errors="*{maxPeople}"
+                   th:if="${#fields.hasErrors('maxPeople')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Standar Room:</td>
+            <td>
+                <input type="text" th:field="*{standardRoom}" />
+                <p style="color: aqua"
+                   th:errors="*{standardRoom}"
+                   th:if="${#fields.hasErrors('standardRoom')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Description Other Convenience:</td>
+            <td>
+                <input type="text" th:field="*{descriptionOtherConvenience}" />
+                <p style="color: aqua"
+                   th:errors="*{descriptionOtherConvenience}"
+                   th:if="${#fields.hasErrors('descriptionOtherConvenience')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Pool Area:</td>
+            <td>
+                <input type="text" th:field="*{poolArea}" />
+                <p style="color: aqua"
+                   th:errors="*{poolArea}"
+                   th:if="${#fields.hasErrors('poolArea')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Number of Floors:</td>
+            <td>
+                <input type="text" th:field="*{numberOfFloors}" />
+                <p style="color: aqua"
+                   th:errors="*{numberOfFloors}"
+                   th:if="${#fields.hasErrors('numberOfFloors')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Facility Free:</td>
+            <td>
+                <input type="text" th:field="*{facilityFree}" />
+                <p style="color: aqua"
+                   th:errors="*{facilityFree}"
+                   th:if="${#fields.hasErrors('facilityFree')}">
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Rent Type:</td>
+            <td>
+                <select th:field="*{rentType}">
+                    <option th:each="item:${rentTypeList}" th:value="${item.rentTypeId}" th:text="${item.rentTypeName}"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Facility Type:</td>
+            <td>
+                <select th:field="*{facilityType}">
+                    <option th:each="item:${facilityTypeList}" th:value="${item.facilityTypeId}" th:text="${item.facilityTypeName}"></option>
+                </select>
+            </td>
+        </tr>
+
+    </table>
+    <button type="submit">Save</button>
+</form>
 
 </body>
 </html>

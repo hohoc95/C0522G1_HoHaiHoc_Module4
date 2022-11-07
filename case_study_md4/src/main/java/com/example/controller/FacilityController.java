@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.dto.FacilityDto;
+import com.example.model.customer.Customer;
 import com.example.model.facility.Facility;
 import com.example.service.facility.IFacilityService;
 import com.example.service.facility.IFacilityTypeService;
@@ -72,10 +73,50 @@ public class FacilityController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model){
+        FacilityDto facilityDto = new FacilityDto();
+        Facility facility = iFacilityService.findById(id);
+        BeanUtils.copyProperties(facility, facilityDto);
+        model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
+        model.addAttribute("rentTypeList", iRentTypeService.findAll());
+        model.addAttribute("facilityDto", facilityDto);
 
+        return "facility/edit";
     }
 
+    @PostMapping("/update")
+    public String update(@Validated @ModelAttribute FacilityDto facilityDto,
+                         BindingResult bindingResult,
+                         RedirectAttributes redirectAttributes,
+                         Model model){
+        new FacilityDto().validate(facilityDto, bindingResult);
+        if(bindingResult.hasFieldErrors()){
+            model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
+            model.addAttribute("rentTypeList", iRentTypeService.findAll());
 
+            return "facility/edit";
+        }
+        else {
+            Facility facility = new Facility();
+            BeanUtils.copyProperties(facilityDto,facility);
+
+            iFacilityService.save(facility);
+            redirectAttributes.addFlashAttribute("mess", "Edit Facility Successful!");
+            return "redirect:/facility";
+        }
+    }
+
+    /*
+     * Xóa mềm - Soft Delete.
+     */
+
+    @GetMapping("/delete/{id}")
+    public String remove(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
+        Facility facility = iFacilityService.findById(id);
+        facility.setDelete(true);
+        iFacilityService.save(facility);
+        redirectAttributes.addFlashAttribute("mess","Delete successfull!");
+        return "redirect:/customer";
+    }
 
 
 }
