@@ -1,14 +1,11 @@
-package com.example.model.facility;
+package com.example.dto;
 
-import com.example.model.contract.Contract;
+import com.example.model.facility.FacilityType;
+import com.example.model.facility.RentType;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-import javax.persistence.*;
-import java.util.Set;
-
-@Entity
-public class Facility {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FacilityDto implements Validator {
     private int facilityId;
     private String facilityName;
     private String facilityArea;
@@ -20,19 +17,10 @@ public class Facility {
     private String numberOfFloors;
     private String facilityFree;
     private boolean isDelete;
-
-    @ManyToOne
-    @JoinColumn(name= "rent_type_id",referencedColumnName = "rentTypeId")
     private RentType rentType;
-
-    @ManyToOne
-    @JoinColumn(name= "facility_type_id",referencedColumnName = "facilityTypeId")
     private FacilityType facilityType;
 
-    @OneToMany(mappedBy = "facility")
-    private Set<Contract> contract;
-
-    public Facility() {
+    public FacilityDto() {
     }
 
     public int getFacilityId() {
@@ -139,11 +127,13 @@ public class Facility {
         this.facilityType = facilityType;
     }
 
-    public Set<Contract> getContract() {
-        return contract;
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
     }
 
-    public void setContract(Set<Contract> contract) {
-        this.contract = contract;
+    @Override
+    public void validate(Object target, Errors errors) {
+        FacilityDto facilityDto = (FacilityDto) target;
     }
 }

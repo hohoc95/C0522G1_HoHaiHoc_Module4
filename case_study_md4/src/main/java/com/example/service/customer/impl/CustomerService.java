@@ -30,11 +30,20 @@ public class CustomerService implements ICustomerService {
 //    public Page<Customer> findAll(Pageable pageable) {
 //        return iCustomerRepository.findAll(pageable);
 //    }
-
+//
     @Override
     public Page<Customer> findByCustomerNameContaining(String name, Pageable pageable) {
         return iCustomerRepository.findByCustomerNameContaining(name, pageable);
     }
+
+//    @Override
+//    public Page<Customer> searchCustomer(String nameSearch, String emailSearch, Pageable pageable) {
+//        return iCustomerRepository.searchCustomer(nameSearch,emailSearch,pageable);
+//    }
+//    @Override
+//    public Page<Customer> searchCustomer(String name, String email, Pageable pageable) {
+//        return iCustomerRepository.searchCustomer(name,email,pageable);
+//    }
 
 //    @Override
 //    public Page<Customer> searchCustomer(String nameSearch, String customerTypeSearch, String phoneSearch, Pageable pageable) {

@@ -1,5 +1,7 @@
 package com.example.model.facility;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -7,20 +9,21 @@ import java.util.Set;
 public class FacilityType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer facilityTypeId;
+    private int facilityTypeId;
     private String facilityTypeName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "facilityType")
     private Set<Facility> facilities;
 
     public FacilityType() {
     }
 
-    public Integer getFacilityTypeId() {
+    public int getFacilityTypeId() {
         return facilityTypeId;
     }
 
-    public void setFacilityTypeId(Integer facilityTypeId) {
+    public void setFacilityTypeId(int facilityTypeId) {
         this.facilityTypeId = facilityTypeId;
     }
 

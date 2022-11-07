@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a th:href="@{/facility/create}">Add new blog</a>
+
+
+    <form action="/facility/">
+        <input type="text" name="name" placeholder="Name search">
+        <input type="text" name="email" placeholder="Email search">
+        <button type="submit">Search</button>
+    </form>
+
+    <p style="color: green" th:text="${mess}"></p>
+
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Area</th>
+            <th>Rent Cost</th>
+            <th>Max people</th>
+            <th>Standar Room</th>
+            <th>Description Other Convenience</th>
+            <th>Pool Area</th>
+            <th>Number of Floors</th>
+            <th>Facility Free</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>View</th>
+        </tr>
+
+        <tr th:each="facility :${facilityList}">
+            <td th:text="${facility.facilityId}"></td>
+            <td th:text="${facility.facilityName}"></td>
+            <td th:text="${facility.facilityArea}"></td>
+            <td th:text="${facility.rentCost}"></td>
+            <td th:text="${facility.maxPeople}"></td>
+            <td th:text="${facility.standardRoom}"></td>
+            <td th:text="${facility.descriptionOtherConvenience}"></td>
+            <td th:text="${facility.poolArea}"></td>
+            <td th:text="${facility.numberOfFloors}"></td>
+            <td th:text="${facility.facilityFree}"></td>
+            <td><a th:href="@{/facility/edit/__${facility.facilityId}__}">Edit</a></td>
+            <td><a th:href="@{/facility/delete/__${facility.facilityId}__}">Delete</a></td>
+            <td><a th:href="@{/facility/view/__${facility.facilityId}__}">View</a></td>
+        </tr>
+    </table>
+
+    <div>
+        <a th:href="@{'/customer/'(page=${facilityList.number - 1}, name=${name})}" th:if="${facilityList.hasPrevious()}">Trước</a>
+        <span th:text="${facilityList.number + 1}"></span>/<span th:text="${facilityList.totalPages}"></span>
+        <a th:href="@{'/customer/'(page=${facilityList.number + 1}, name=${name})}" th:if="${facilityList.hasNext()}">Sau</a>
+    </div>
+
+</body>
+</html>

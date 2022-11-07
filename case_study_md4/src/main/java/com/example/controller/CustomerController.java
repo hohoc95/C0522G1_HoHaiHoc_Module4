@@ -33,10 +33,33 @@ public class CustomerController {
         model.addAttribute("customerList", iCustomerService.findByCustomerNameContaining(name, pageable));
         model.addAttribute("name", name);
         model.addAttribute("email", email);
-        model.addAttribute("name", name);
+//        model.addAttribute("name", name);
 
         return "customer/list";
     }
+
+//    @GetMapping("")
+//    public String showCustomerListAndSearch (@PageableDefault(value = 5) Pageable pageable,
+//                           @RequestParam(value = "nameSearch" ,defaultValue = "") String nameSearch,
+//                           @RequestParam(value = "emailSearch",defaultValue = "") String emailSearch,
+//                           Model model){
+//        model.addAttribute("customerList",iCustomerService.searchCustomer(nameSearch,emailSearch,pageable));
+//        model.addAttribute("customerTypeList",iCustomerTypeService.findAll());
+//        model.addAttribute("nameSearch",nameSearch);
+//        model.addAttribute("emailSearch",emailSearch);
+//        return "/customer/list";
+//    }
+//    @GetMapping("")
+//    public String showCustomerListAndSearch (@PageableDefault(value = 5) Pageable pageable,
+//                           @RequestParam(value = "name" ,defaultValue = "") String name,
+//                           @RequestParam(value = "email",defaultValue = "") String email,
+//                           Model model){
+//        model.addAttribute("customerList",iCustomerService.searchCustomer(name,email,pageable));
+//        model.addAttribute("customerTypeList",iCustomerTypeService.findAll());
+//        model.addAttribute("name",name);
+//        model.addAttribute("email",email);
+//        return "/customer/list";
+//    }
 
 
     @GetMapping("/create")
