@@ -3,22 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
 </head>
 <body>
-    <a th:href="@{/facility/create}">Add new blog</a>
+    <a th:href="@{/facility/create}">Add new facility</a>
 
 
     <form action="/facility/">
         <input type="text" name="name" placeholder="Name search">
-        <input type="text" name="email" placeholder="Email search">
+        <select style="width: 20%" th:name="facilityType">
+            <option value=""  selected>Facility Type search</option>
+            <option th:each="item : ${facilityTypeList}" th:value="${item.facilityTypeName}" th:text="${item.facilityTypeName}"></option>
+        </select>
         <button type="submit">Search</button>
     </form>
 
     <p style="color: green" th:text="${mess}"></p>
 
-    <table border="1">
-        <tr>
-            <th>Id</th>
+    <table border="1" class="table table-light table-striped table-bordered">
+        <tr class="table-dark text-light">
+<!--            <th>Id</th>-->
             <th>Name</th>
             <th>Area</th>
             <th>Rent Cost</th>
@@ -28,13 +35,15 @@
             <th>Pool Area</th>
             <th>Number of Floors</th>
             <th>Facility Free</th>
+            <th>Facility Type</th>
+            <th>Rent Tyoe</th>
             <th>Edit</th>
             <th>Delete</th>
             <th>View</th>
         </tr>
 
         <tr th:each="facility :${facilityList}">
-            <td th:text="${facility.facilityId}"></td>
+<!--            <td th:text="${facility.facilityId}"></td>-->
             <td th:text="${facility.facilityName}"></td>
             <td th:text="${facility.facilityArea}"></td>
             <td th:text="${facility.rentCost}"></td>
@@ -44,6 +53,8 @@
             <td th:text="${facility.poolArea}"></td>
             <td th:text="${facility.numberOfFloors}"></td>
             <td th:text="${facility.facilityFree}"></td>
+            <td th:text="${facility.facilityType.facilityTypeName}"></td>
+            <td th:text="${facility.rentType.rentTypeName}"></td>
             <td><a th:href="@{/facility/edit/__${facility.facilityId}__}">Edit</a></td>
             <td><a th:href="@{/facility/delete/__${facility.facilityId}__}">Delete</a></td>
             <td><a th:href="@{/facility/view/__${facility.facilityId}__}">View</a></td>
@@ -57,4 +68,8 @@
     </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous">
+</script>
 </html>

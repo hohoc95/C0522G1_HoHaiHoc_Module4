@@ -10,7 +10,7 @@ public interface ICustomerService {
 //    List<Customer> findAll();
     Customer findById(int id);
 //    Page<Customer> findAll(Pageable pageable);
-    Page<Customer> findByCustomerNameContaining(String name , Pageable pageable);
+    Page<Customer> findByCustomerNameContaining(String name,String email,String customerType, Pageable pageable);
 
 //    Page<Customer> searchCustomer(String nameSearch, String emailSearch, Pageable pageable);
 //    Page<Customer> searchCustomer(String name, String email, Pageable pageable);

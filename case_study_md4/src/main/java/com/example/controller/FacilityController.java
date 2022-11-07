@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dto.CustomerDto;
 import com.example.dto.FacilityDto;
 import com.example.model.customer.Customer;
 import com.example.model.facility.Facility;
@@ -31,11 +32,14 @@ public class FacilityController {
     private IRentTypeService iRentTypeService;
 
     @GetMapping("")
-    public String showListAndSearch(@PageableDefault(value = 5)Pageable pageable,
-                                    @RequestParam(defaultValue = "")String name, String email,
-                                    Model model){
+    public String showListAndSearch(@PageableDefault(value = 5) Pageable pageable,
+                                    @RequestParam(value = "name",defaultValue = "") String name,
+                                    @RequestParam(value = "facilityType",defaultValue = "") String facilityType,
+                                    Model model) {
         System.out.println(name);
-        model.addAttribute("facilityList", iFacilityService.findByFacilityNameContaining(name, pageable));
+        model.addAttribute("facilityList", iFacilityService.findByFacilityNameContaining(name,facilityType, pageable));
+        model.addAttribute("facilityTypeList",iFacilityTypeService.findAll());
+        model.addAttribute("rentTypeList",iRentTypeService.findAll());
         model.addAttribute("name", name);
 
         return "facility/list";
@@ -87,24 +91,23 @@ public class FacilityController {
     public String update(@Validated @ModelAttribute FacilityDto facilityDto,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes,
-                         Model model){
+                         Model model) {
         new FacilityDto().validate(facilityDto, bindingResult);
-        if(bindingResult.hasFieldErrors()){
+        if (bindingResult.hasFieldErrors()) {
             model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
             model.addAttribute("rentTypeList", iRentTypeService.findAll());
 
             return "facility/edit";
-        }
-        else {
+        } else {
             Facility facility = new Facility();
-            BeanUtils.copyProperties(facilityDto,facility);
+            BeanUtils.copyProperties(facilityDto, facility);
 
             iFacilityService.save(facility);
             redirectAttributes.addFlashAttribute("mess", "Edit Facility Successful!");
             return "redirect:/facility";
         }
-    }
 
+    }
     /*
      * Xóa mềm - Soft Delete.
      */
@@ -115,8 +118,11 @@ public class FacilityController {
         facility.setDelete(true);
         iFacilityService.save(facility);
         redirectAttributes.addFlashAttribute("mess","Delete successfull!");
-        return "redirect:/customer";
+        return "redirect:/facility";
     }
 
+/*
+ * Xóa cứng
+ * */
 
 }

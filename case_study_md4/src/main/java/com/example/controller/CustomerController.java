@@ -26,39 +26,31 @@ public class CustomerController {
 
     @GetMapping("")
     public String showCustomerListAndSearch(@PageableDefault(value = 5) Pageable pageable,
-                                            @RequestParam(defaultValue = "") String name,
-                                            String email,
+                                            @RequestParam(value = "name",defaultValue = "") String name,
+                                            @RequestParam(value = "email",defaultValue = "") String email,
+                                            @RequestParam(value = "customerType",defaultValue = "") String customerType,
                                             Model model) {
         System.out.println(name);
-        model.addAttribute("customerList", iCustomerService.findByCustomerNameContaining(name, pageable));
+        model.addAttribute("customerList", iCustomerService.findByCustomerNameContaining(name, email, customerType, pageable));
+        model.addAttribute("customerTypeList",iCustomerTypeService.findAll());
         model.addAttribute("name", name);
         model.addAttribute("email", email);
-//        model.addAttribute("name", name);
+        model.addAttribute("customerType", customerType);
 
         return "customer/list";
     }
 
-//    @GetMapping("")
-//    public String showCustomerListAndSearch (@PageableDefault(value = 5) Pageable pageable,
-//                           @RequestParam(value = "nameSearch" ,defaultValue = "") String nameSearch,
-//                           @RequestParam(value = "emailSearch",defaultValue = "") String emailSearch,
-//                           Model model){
-//        model.addAttribute("customerList",iCustomerService.searchCustomer(nameSearch,emailSearch,pageable));
-//        model.addAttribute("customerTypeList",iCustomerTypeService.findAll());
-//        model.addAttribute("nameSearch",nameSearch);
-//        model.addAttribute("emailSearch",emailSearch);
-//        return "/customer/list";
-//    }
+
 //    @GetMapping("")
 //    public String showCustomerListAndSearch (@PageableDefault(value = 5) Pageable pageable,
 //                           @RequestParam(value = "name" ,defaultValue = "") String name,
 //                           @RequestParam(value = "email",defaultValue = "") String email,
 //                           Model model){
-//        model.addAttribute("customerList",iCustomerService.searchCustomer(name,email,pageable));
+//        model.addAttribute("customerList",iCustomerService.findByCustomerNameContaining(name,email,pageable));
 //        model.addAttribute("customerTypeList",iCustomerTypeService.findAll());
 //        model.addAttribute("name",name);
 //        model.addAttribute("email",email);
-//        return "/customer/list";
+//        return "customer/list";
 //    }
 
 
@@ -135,54 +127,5 @@ public class CustomerController {
 * Xóa cứng
 * */
 
-//    @GetMapping("/delete/{id}")
-//    public String showDeleteFormCustomer(@PathVariable int id, Model model){
-//        model.addAttribute("customerList",iCustomerService.findById(id));
-//        model.addAttribute("customerDto", new CustomerDto());
-//        return "customer/delete";
-//    }
 
-//    @PostMapping("/delete")
-//    public String deleteCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes){
-//        iCustomerService.remove(customer.getCustomerId());
-//        redirectAttributes.addFlashAttribute("mess","Delete successful!");
-//        return "redirect:/customer";
-//    }
-
-//    @GetMapping("/delete/{id}")
-//    public String delete(@RequestParam(value = "idDelete") int id, RedirectAttributes redirect) {
-//        iCustomerService.delete(id);
-//        redirect.addFlashAttribute("mess", "Removed Customer successfully!");
-//        return "redirect:/customer";
-//    }
-
-
-
-/*
-Xóa mềm - Soft Delete.
-*/
-
-//    @GetMapping("/delete/{id}")
-//    public String showDeleteFormCustomer(@PathVariable int id, Model model){
-//        CustomerDto customerDto = new CustomerDto();
-//        model.addAttribute("customerList", iCustomerService.delete(id)) ;
-//        BeanUtils.copyProperties(customer, customerDto);
-//        model.addAttribute("customerDto", customerDto);
-
-
-//        BeanUtils.copyProperties(customer, customerDto);
-//        model.addAttribute("customerList", (customer.isDelete()== false) );
-//        model.addAttribute("customerDto", customerDto);
-//        return "redirect:/customer";
-//    }
-//    @PostMapping("/delete")
-//    public String deleteCustomer(@ModelAttribute CustomerDto customerDto, RedirectAttributes redirectAttributes,
-//                                 Model model){
-//        Customer customer = new Customer();
-//        BeanUtils.copyProperties(customerDto, customer);
-//
-//        iCustomerService.save(customer);
-//        redirectAttributes.addFlashAttribute("mess", "Delete successful!");
-//        return "redirect:/customer";
-//    }
 }

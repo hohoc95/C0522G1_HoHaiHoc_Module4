@@ -21,8 +21,8 @@ public class FacilityService implements IFacilityService {
     }
 
     @Override
-    public Page<Facility> findByFacilityNameContaining(String name, Pageable pageable) {
-        return iFacilityRepository.findByFacilityNameContaining(name, pageable);
+    public Page<Facility> findByFacilityNameContaining(String name, String facilityType, Pageable pageable) {
+        return iFacilityRepository.findByFacilityNameContaining(name, facilityType, pageable);
     }
 
     @Override

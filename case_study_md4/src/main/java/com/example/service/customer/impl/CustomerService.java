@@ -15,40 +15,15 @@ public class CustomerService implements ICustomerService {
     @Autowired
     private ICustomerRepository iCustomerRepository;
 
-//    @Override
-//    public List<Customer> findAll() {
-//        return iCustomerRepository.findAll();
-//    }
-
     @Override
     public Customer findById(int id) {
         return iCustomerRepository.findById(id);
     }
 
-//
-//    @Override
-//    public Page<Customer> findAll(Pageable pageable) {
-//        return iCustomerRepository.findAll(pageable);
-//    }
-//
     @Override
-    public Page<Customer> findByCustomerNameContaining(String name, Pageable pageable) {
-        return iCustomerRepository.findByCustomerNameContaining(name, pageable);
+    public Page<Customer> findByCustomerNameContaining(String name, String email, String customerType, Pageable pageable) {
+        return iCustomerRepository.findByCustomerNameContaining(name, email, customerType, pageable);
     }
-
-//    @Override
-//    public Page<Customer> searchCustomer(String nameSearch, String emailSearch, Pageable pageable) {
-//        return iCustomerRepository.searchCustomer(nameSearch,emailSearch,pageable);
-//    }
-//    @Override
-//    public Page<Customer> searchCustomer(String name, String email, Pageable pageable) {
-//        return iCustomerRepository.searchCustomer(name,email,pageable);
-//    }
-
-//    @Override
-//    public Page<Customer> searchCustomer(String nameSearch, String customerTypeSearch, String phoneSearch, Pageable pageable) {
-//        return iCustomerRepository.searchCustomer(nameSearch, customerTypeSearch, phoneSearch, pageable);
-//    }
 
     @Override
     public void save(Customer customer) {
@@ -65,8 +40,4 @@ public class CustomerService implements ICustomerService {
         iCustomerRepository.deleteById(id);
     }
 
-//    @Override
-//    public void delete(int id) {
-//        iCustomerRepository.delete(id);
-//    }
 }
