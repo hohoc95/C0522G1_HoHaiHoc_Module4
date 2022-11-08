@@ -61,11 +61,50 @@
         </tr>
     </table>
 
-    <div>
-        <a th:href="@{'/facility/'(page=${facilityList.number - 1}, name=${name})}" th:if="${facilityList.hasPrevious()}">Trước</a>
-        <span th:text="${facilityList.number + 1}"></span>/<span th:text="${facilityList.totalPages}"></span>
-        <a th:href="@{'/facility/'(page=${facilityList.number + 1}, name=${name})}" th:if="${facilityList.hasNext()}">Sau</a>
+<!--    <div>-->
+<!--        <a th:href="@{'/facility/'(page=${facilityList.number - 1}, name=${name})}" th:if="${facilityList.hasPrevious()}">Trước</a>-->
+<!--        <span th:text="${facilityList.number + 1}"></span>/<span th:text="${facilityList.totalPages}"></span>-->
+<!--        <a th:href="@{'/facility/'(page=${facilityList.number + 1}, name=${name})}" th:if="${facilityList.hasNext()}">Sau</a>-->
+<!--    </div>-->
+
+
+    <div class="row">
+        <div class="col-5">
+
+        </div>
+        <div aria-label="Page navigation example" class="text-center col-2" style="overflow-x: hidden;overflow-y: hidden">
+            <ul class="pagination">
+                <li class="page-link"><a
+                        th:href="@{'/facility'(page=${facilityList.number -1},name=${name},facilityType=${facilityType})}"
+                        th:if="${facilityList.hasPrevious()}">Previous</a></li>
+                <li class="page-item">
+                    <a class="page-link" th:if="${facilityList.hasPrevious()}"
+                       th:href="@{'/facility'(page=${facilityList.number - 1},name=${name},facilityType=${facilityType})}"
+                       th:text="${facilityList.number }"></a>
+                </li>
+
+                <li class="page-item active">
+                    <a class="page-link" th:text="${facilityList.number + 1}"
+                       th:href="@{'/facility'(page=${facilityList.number},name=${name},facilityType=${facilityType})}">
+                        <span class="sr-only">(trang hiện tại)</span></a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" th:if="${facilityList.hasNext()}"
+                       th:href="@{'/facility'(page=${facilityList.number + 1},name=${name},facilityType=${facilityType})}"
+                       th:text="${facilityList.number + 2}"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{'/facility'(page=${facilityList.number + 1},name=${name}, facilityType=${facilityType})}"
+                       th:if="${facilityList.hasNext()}">Next</a></li>
+            </ul>
+        </div>
+        <div class="col-5">
+
+        </div>
     </div>
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

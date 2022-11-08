@@ -14,7 +14,7 @@ public class Customer {
     private String customerPhone;
     private String customerEmail;
     private String customerAddress;
-    private boolean isDelete;
+    private int isDelete;
 
     @ManyToOne
     @JoinColumn(name = "customer_type_Id", referencedColumnName = "customerTypeId")
@@ -87,11 +87,12 @@ public class Customer {
         this.customerAddress = customerAddress;
     }
 
-    public boolean isDelete() {
+
+    public int isDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean delete) {
+    public void setDelete(int delete) {
         isDelete = delete;
     }
 

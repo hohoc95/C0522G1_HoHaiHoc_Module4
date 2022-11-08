@@ -30,7 +30,7 @@ public class CustomerController {
                                             @RequestParam(value = "email",defaultValue = "") String email,
                                             @RequestParam(value = "customerType",defaultValue = "") String customerType,
                                             Model model) {
-        System.out.println(name);
+//        System.out.println(name);
         model.addAttribute("customerList", iCustomerService.findByCustomerNameContaining(name, email, customerType, pageable));
         model.addAttribute("customerTypeList",iCustomerTypeService.findAll());
         model.addAttribute("name", name);
@@ -96,22 +96,34 @@ public class CustomerController {
         }
     }
 
-/*
-* Xóa mềm - Soft Delete.
-*/
-
     @GetMapping("/delete/{id}")
     public String remove(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
         Customer customer = iCustomerService.findById(id);
-        customer.setDelete(true);
+        customer.setDelete(1);
+//        customer.setDelete(1);
         iCustomerService.save(customer);
         redirectAttributes.addFlashAttribute("mess","Delete successfull!");
         return "redirect:/customer";
     }
 
-/*
-* Xóa cứng
-* */
 
+//    @GetMapping("/delete/{id}")
+//    public String showDeleteForm(@PathVariable int id, Model model) {
+//        model.addAttribute("customer", iCustomerService.findById(id));
+//        return "customer/delete";
+//    }
+
+//    @PostMapping("/delete")
+//    public String deleteBlog(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
+//        iCustomerService.remove(customer.getCustomerId());
+//        redirectAttributes.addFlashAttribute("mess", "delete successful");
+//        return "redirect:/customer";
+//    }
+//    @PostMapping("/delete")
+//    public String deleteBlog(@RequestParam int id, RedirectAttributes redirectAttributes) {
+//        iCustomerService.remove(id);
+//        redirectAttributes.addFlashAttribute("mess", "delete successful");
+//        return "redirect:/customer";
+//    }
 
 }
