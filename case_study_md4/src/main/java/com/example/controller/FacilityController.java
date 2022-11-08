@@ -47,8 +47,8 @@ public class FacilityController {
 
     @GetMapping("/create")
     public String showFormCreate(Model model){
-        model.addAttribute("facilityTypeList",iFacilityTypeService.findAll()); // Dư thừa
-        model.addAttribute("rentTypeList",iRentTypeService.findAll()); // Dư thừa
+        model.addAttribute("facilityTypeList",iFacilityTypeService.findAll());
+        model.addAttribute("rentTypeList",iRentTypeService.findAll());
         model.addAttribute("facilityDto",new FacilityDto());
 
         return "facility/create";

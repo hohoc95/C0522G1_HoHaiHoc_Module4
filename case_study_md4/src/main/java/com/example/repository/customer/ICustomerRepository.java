@@ -25,8 +25,10 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
             " and " +
             " customer.is_delete = 0 ",
             nativeQuery = true)
+
     Page<Customer> findByCustomerNameContaining(@Param("name") String name,
                                                 @Param("email") String email,
                                                 @Param("customerType") String customerType, Pageable pageable);
 
 }
+

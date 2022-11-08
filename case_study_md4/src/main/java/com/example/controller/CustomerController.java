@@ -40,20 +40,6 @@ public class CustomerController {
         return "customer/list";
     }
 
-
-//    @GetMapping("")
-//    public String showCustomerListAndSearch (@PageableDefault(value = 5) Pageable pageable,
-//                           @RequestParam(value = "name" ,defaultValue = "") String name,
-//                           @RequestParam(value = "email",defaultValue = "") String email,
-//                           Model model){
-//        model.addAttribute("customerList",iCustomerService.findByCustomerNameContaining(name,email,pageable));
-//        model.addAttribute("customerTypeList",iCustomerTypeService.findAll());
-//        model.addAttribute("name",name);
-//        model.addAttribute("email",email);
-//        return "customer/list";
-//    }
-
-
     @GetMapping("/create")
     public String showFormCreateCustomer(Model model) {
         model.addAttribute("customerTypeList", iCustomerTypeService.findAll());
