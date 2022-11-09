@@ -1,9 +1,9 @@
 package com.example.controller;
 
-import com.example.dto.CustomerDto;
 import com.example.dto.FacilityDto;
-import com.example.model.customer.Customer;
 import com.example.model.facility.Facility;
+import com.example.model.facility.FacilityType;
+import com.example.model.facility.RentType;
 import com.example.service.facility.IFacilityService;
 import com.example.service.facility.IFacilityTypeService;
 import com.example.service.facility.IRentTypeService;
@@ -18,6 +18,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/facility")
 public class FacilityController {
@@ -31,6 +33,17 @@ public class FacilityController {
     @Autowired
     private IRentTypeService iRentTypeService;
 
+    @ModelAttribute("facilityTypeList")
+    public List<FacilityType> facilityTypeList(){
+        return iFacilityTypeService.findAll();
+    }
+
+    @ModelAttribute("rentTypeList")
+    public List<RentType> rentTypeList(){
+        return iRentTypeService.findAll();
+    }
+
+
     @GetMapping("")
     public String showListAndSearch(@PageableDefault(value = 5) Pageable pageable,
                                     @RequestParam(value = "name",defaultValue = "") String name,
@@ -38,8 +51,8 @@ public class FacilityController {
                                     Model model) {
         System.out.println(name);
         model.addAttribute("facilityList", iFacilityService.findByFacilityNameContaining(name,facilityType, pageable));
-        model.addAttribute("facilityTypeList",iFacilityTypeService.findAll());
-        model.addAttribute("rentTypeList",iRentTypeService.findAll());
+//        model.addAttribute("facilityTypeList",iFacilityTypeService.findAll());
+//        model.addAttribute("rentTypeList",iRentTypeService.findAll());
         model.addAttribute("name", name);
 
         return "facility/list";
@@ -47,8 +60,8 @@ public class FacilityController {
 
     @GetMapping("/create")
     public String showFormCreate(Model model){
-        model.addAttribute("facilityTypeList",iFacilityTypeService.findAll());
-        model.addAttribute("rentTypeList",iRentTypeService.findAll());
+//        model.addAttribute("facilityTypeList",iFacilityTypeService.findAll());
+//        model.addAttribute("rentTypeList",iRentTypeService.findAll());
         model.addAttribute("facilityDto",new FacilityDto());
 
         return "facility/create";
@@ -61,8 +74,8 @@ public class FacilityController {
                                 Model model){
         new FacilityDto().validate(facilityDto, bindingResult);
         if(bindingResult.hasFieldErrors()){
-            model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
-            model.addAttribute("rentTypeList", iRentTypeService.findAll());
+//            model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
+//            model.addAttribute("rentTypeList", iRentTypeService.findAll());
 
             return "facility/create";
         }
@@ -80,8 +93,8 @@ public class FacilityController {
         FacilityDto facilityDto = new FacilityDto();
         Facility facility = iFacilityService.findById(id);
         BeanUtils.copyProperties(facility, facilityDto);
-        model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
-        model.addAttribute("rentTypeList", iRentTypeService.findAll());
+//        model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
+//        model.addAttribute("rentTypeList", iRentTypeService.findAll());
         model.addAttribute("facilityDto", facilityDto);
 
         return "facility/edit";
@@ -94,8 +107,8 @@ public class FacilityController {
                          Model model) {
         new FacilityDto().validate(facilityDto, bindingResult);
         if (bindingResult.hasFieldErrors()) {
-            model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
-            model.addAttribute("rentTypeList", iRentTypeService.findAll());
+//            model.addAttribute("facilityTypeList", iFacilityTypeService.findAll());
+//            model.addAttribute("rentTypeList", iRentTypeService.findAll());
 
             return "facility/edit";
         } else {

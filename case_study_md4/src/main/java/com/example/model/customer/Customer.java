@@ -14,7 +14,8 @@ public class Customer {
     private String customerPhone;
     private String customerEmail;
     private String customerAddress;
-    private int isDelete;
+    private boolean isDelete;
+//    private int isDelete;
 
     @ManyToOne
     @JoinColumn(name = "customer_type_Id", referencedColumnName = "customerTypeId")
@@ -88,13 +89,21 @@ public class Customer {
     }
 
 
-    public int isDelete() {
+    public boolean isDelete() {
         return isDelete;
     }
 
-    public void setDelete(int delete) {
+    public void setDelete(boolean delete) {
         isDelete = delete;
     }
+
+//    public int isDelete() {
+//        return isDelete;
+//    }
+//
+//    public void setDelete(int delete) {
+//        isDelete = delete;
+//    }
 
 
     public CustomerType getCustomerType() {

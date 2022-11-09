@@ -3,14 +3,16 @@ package com.example.dto;
 import com.example.model.customer.Customer;
 import com.example.model.employee.Employee;
 import com.example.model.facility.Facility;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-public class ContractDto {
+public class ContractDto implements Validator {
     private Integer contractId;
     private String startDate;
     private String endDate;
     private String deposit;
     private boolean isDelete;
-    private Employee employee;
+//    private Employee employee;
     private Customer customer;
     private Facility facility;
 
@@ -57,13 +59,13 @@ public class ContractDto {
         isDelete = delete;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
 
     public Customer getCustomer() {
         return customer;
@@ -79,5 +81,15 @@ public class ContractDto {
 
     public void setFacility(Facility facility) {
         this.facility = facility;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+        ContractDto contractDto = (ContractDto) target;
     }
 }

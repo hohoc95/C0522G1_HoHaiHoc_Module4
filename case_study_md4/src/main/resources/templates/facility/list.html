@@ -11,6 +11,18 @@
 <body>
     <a th:href="@{/facility/create}">Add new facility</a>
 
+<!--
+
+    <form action="/facility/">
+        <input type="text" name="name" placeholder="Name search" th:value="${name}">
+        <select style="width: 20%" th:name="facilityType" >
+            <option value=""  selected >Facility Type search</option>
+            <option th:each="item : ${facilityTypeList}" th:value="${item.facilityTypeName}" th:text="${item.facilityTypeName}"></option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+
+-->
 
     <form action="/facility/">
         <input type="text" name="name" placeholder="Name search" th:value="${name}">

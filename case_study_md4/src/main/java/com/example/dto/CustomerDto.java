@@ -13,7 +13,8 @@ public class CustomerDto  implements Validator {
     private String customerPhone;
     private String customerEmail;
     private String customerAddress;
-    private int isDelete;
+    private boolean isDelete;
+//    private int isDelete;
     private CustomerType customerType;
 
 
@@ -92,13 +93,21 @@ public class CustomerDto  implements Validator {
         this.customerType = customerType;
     }
 
-    public int isDelete() {
+    public boolean isDelete() {
         return isDelete;
     }
 
-    public void setDelete(int delete) {
+    public void setDelete(boolean delete) {
         isDelete = delete;
     }
+
+//    public int isDelete() {
+//        return isDelete;
+//    }
+//
+//    public void setDelete(int delete) {
+//        isDelete = delete;
+//    }
 
 
     @Override

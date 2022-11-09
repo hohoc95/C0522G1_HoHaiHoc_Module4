@@ -8,19 +8,19 @@
 
     <h3>Delete Customer</h3>
 
-    <form th:action="@{/customer/delete}" method="post" th:object="${customer}">
+    <form th:action="@{/customer/delete}" method="post" th:object="${customerDto}">
         <table>
             <tr>
-                <td><input type="hidden" th:field="*{customerId}"/></td>
+                <td><input type="hidden" th:field="*{customerDtoId}"/></td>
 
             </tr>
 
 
 
-<!--            <tr>-->
-<!--                <td>Name</td>-->
-<!--                <td><input type="text" th:field="*{customerName}"></td>-->
-<!--            </tr>-->
+            <tr>
+                <td>Name</td>
+                <td><input type="text" th:field="*{customerDtoName}"></td>
+            </tr>
 
         </table>
 

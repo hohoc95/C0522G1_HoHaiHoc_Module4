@@ -20,9 +20,9 @@ public class Contract {
     @OneToMany(mappedBy = "contract")
     private Set<ContractDetail> contractDetail;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "employeeId")
-    private Employee employee;
+//    @ManyToOne
+//    @JoinColumn(name = "employee_id", referencedColumnName = "employeeId")
+//    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customerId")
@@ -83,13 +83,13 @@ public class Contract {
         this.contractDetail = contractDetail;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
 
     public Customer getCustomer() {
         return customer;

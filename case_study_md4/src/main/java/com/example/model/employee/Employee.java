@@ -31,8 +31,8 @@ public class Employee {
     @JoinColumn(name = "division_id", referencedColumnName = "divisionId")
     private Division divisions;
 
-    @OneToMany(mappedBy = "employee")
-    private Set<Contract> contract;
+//    @OneToMany(mappedBy = "employee")
+//    private Set<Contract> contract;
 
     public Employee() {
     }
@@ -133,11 +133,11 @@ public class Employee {
         this.divisions = divisions;
     }
 
-    public Set<Contract> getContract() {
-        return contract;
-    }
-
-    public void setContract(Set<Contract> contract) {
-        this.contract = contract;
-    }
+//    public Set<Contract> getContract() {
+//        return contract;
+//    }
+//
+//    public void setContract(Set<Contract> contract) {
+//        this.contract = contract;
+//    }
 }

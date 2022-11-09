@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface IFacilityRepository extends JpaRepository<Facility, Integer > {
     List<Facility> findAll();
+
     Facility findById(int id);
 
     @Query(value = " select facility.* from facility join facility_type on facility.facility_type_id = facility_type.facility_type_id where facility.facility_name like %:name% and facility_type.facility_type_name like %:facilityType% and facility.is_delete = 0 ",
@@ -33,5 +34,9 @@ public interface IFacilityRepository extends JpaRepository<Facility, Integer > {
 //            countQuery = " select count(*) from (select facility.* from facility join facility_type on facility.facility_type_id = facility_type.facility_type_id where facility.facility_name like %:name% and facility_type.facility_type_name like %:facilityType% and facility.is_delete = 0 ) abc ")
 //    Page<Facility> findByFacilityNameContaining(@Param("name")String name,
 //                                                @Param("facilityType") String facilityType, Pageable pageable);
+
+
+
+
 
 }

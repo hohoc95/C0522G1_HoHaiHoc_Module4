@@ -16,12 +16,12 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
 
     @Query(value = "select c.* from customer c join customer_type ct on c.customer_type_id = ct.customer_type_id where c.customer_name like %:name% and c.customer_email like %:email% and ct.customer_type_name like %:customerType% and c.is_delete = 0",
             nativeQuery = true,
-    countQuery = "select count(*) from (select c.* from customer c join customer_type ct on c.customer_type_id = ct.customer_type_id where c.customer_name like %:name% and c.customer_email like %:email% and ct.customer_type_name like %:customerType% and c.is_delete = 0) abc")
+    countQuery = "select c.* from customer c join customer_type ct on c.customer_type_id = ct.customer_type_id where c.customer_name like %:name% and c.customer_email like %:email% and ct.customer_type_name like %:customerType% and c.is_delete = 0")
     Page<Customer> findByCustomer(@Param("name") String name,
                                   @Param("email") String email,
                                   @Param("customerType") String customerType, Pageable pageable);
 
-
+// Hoặc
 //    @Query(value = "select c.* from customer c join customer_type ct on c.customer_type_id = ct.customer_type_id where c.customer_name like %:name% and c.customer_email like %:email2% and ct.customer_type_name like %:customerType% and c.is_delete = 0",
 //            nativeQuery = true,
 //            countQuery = "select count(*) from (select c.* from customer c join customer_type ct on c.customer_type_id = ct.customer_type_id where c.customer_name like %:name% and c.customer_email like %:email2% and ct.customer_type_name like %:customerType% and c.is_delete = 0) abc")
