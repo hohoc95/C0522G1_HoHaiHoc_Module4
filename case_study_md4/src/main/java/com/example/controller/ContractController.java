@@ -61,7 +61,7 @@ public class ContractController {
 
 
     @GetMapping("")
-    public String showList(@PageableDefault(value = 5) Pageable pageable, Model model) {
+    public String showList(@PageableDefault(value = 10) Pageable pageable, Model model) {
         model.addAttribute("contractList", iContractService.findByContract(pageable));
         model.addAttribute("attachFacilityList", iAttachFacilityService.findAll());
         model.addAttribute("contractDetailList", iContractDetailService.findAll());
@@ -105,6 +105,11 @@ public class ContractController {
             return "redirect:/contract";
         }
 
+    @GetMapping("/view/{id}")
+    public String showViewForm(@PathVariable int id, Model model){
+        model.addAttribute("contract", iContractService.findById(id));
+        return "/view";
+    }
 
 
 /*    @GetMapping("/view/{id}")

@@ -28,5 +28,32 @@
 
     </form>
 
+<!--    &lt;!&ndash; Modal Delete&ndash;&gt;
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="/customer/delete" method="get">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title text-danger" id="exampleModalLabel">customer</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body ">
+                        <b>ID :</b>
+                        <input type="hidden" readonly name="id" id="idDelete" class="form-control"><br>
+                        <b>Name :</b>
+                        <input type="text" readonly name="name" id="nameDelete" class="form-control"><br>
+                        <h3 class="text-danger">Are you sure want delete </h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" value="delete">Yes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>-->
+
 </body>
 </html>

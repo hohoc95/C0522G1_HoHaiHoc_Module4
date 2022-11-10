@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IContractRepository extends JpaRepository<Contract, Integer> {
 
+    Contract findById(int id);
+
     @Query(value = "select * from contract",nativeQuery = true)
     Page<Contract> findByContract(Pageable pageable);
 }

@@ -11,6 +11,8 @@ public interface IContractService {
     void save(Contract contract);
     void update(Contract contract);
 
+    Contract findById(int id);
+
     List<Contract> findAll();
 
     Page<Contract> findByContract(Pageable pageable);

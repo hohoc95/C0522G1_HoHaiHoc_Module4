@@ -27,6 +27,11 @@ public class ContractService implements IContractService {
     }
 
     @Override
+    public Contract findById(int id) {
+        return iContractRepository.findById(id);
+    }
+
+    @Override
     public List<Contract> findAll() {
         return iContractRepository.findAll();
     }

@@ -13,131 +13,248 @@
     <a th:href="@{/facility}">Back to facility list</a>
 
     <form th:action="@{/facility/save}" method="post" th:object="${facilityDto}">
-        <table class="table table-light table-striped table-bordered">
-            <tr class="table-dark text-light">
-                <td>Facility Name:</td>
-                <td>
-                    <input type="text" th:field="*{facilityName}" />
-                    <p style="color: aqua"
-                       th:errors="*{facilityName}"
-                       th:if="${#fields.hasErrors('facilityName')}">
-                    </p>
-                </td>
+
+        <table  class="table table-light table-striped table-bordered">
+            <tr>
+                <td>Facility Name:<input type="text" th:field="*{facilityName}" ></td>
+                <p style="color: aqua"
+                   th:errors="*{facilityName}"
+                   th:if="${#fields.hasErrors('facilityName')}">
+                </p>
+            </tr>
+            <tr>
+                <td>Facility Area:<input type="text" th:field="*{facilityArea}" ></td>
+                <p style="color: aqua"
+                   th:errors="*{facilityArea}"
+                   th:if="${#fields.hasErrors('facilityArea')}">
+                </p>
+
             </tr>
 
             <tr>
-                <td>Facility Area:</td>
-                <td>
-                    <input type="text" th:field="*{facilityArea}" />
-                    <p style="color: aqua"
-                       th:errors="*{facilityArea}"
-                       th:if="${#fields.hasErrors('facilityArea')}">
-                    </p>
-                </td>
+                <td>Facility Rent Cost: <input type="text" th:field="*{rentCost}" ></td>
+                <p style="color: aqua"
+                   th:errors="*{rentCost}"
+                   th:if="${#fields.hasErrors('rentCost')}">
+                </p>
+
             </tr>
 
             <tr>
-                <td>Facility Rent Cost:</td>
-                <td>
-                    <input type="text" th:field="*{rentCost}" />
-                    <p style="color: aqua"
-                       th:errors="*{rentCost}"
-                       th:if="${#fields.hasErrors('rentCost')}">
-                    </p>
-                </td>
+                <td>Facility Max People:  <input type="text" th:field="*{maxPeople}" ></td>
+                <p style="color: aqua"
+                   th:errors="*{maxPeople}"
+                   th:if="${#fields.hasErrors('maxPeople')}">
+                </p>
             </tr>
-
-            <tr>
-                <td>Facility Max People:</td>
-                <td>
-                    <input type="text" th:field="*{maxPeople}" />
-                    <p style="color: aqua"
-                       th:errors="*{maxPeople}"
-                       th:if="${#fields.hasErrors('maxPeople')}">
-                    </p>
-                </td>
+            <tr id="option1" style="display: none">
+                <td>Facility Standar Room:<input type="text" th:field="*{standardRoom}" ></td>
+                <p style="color: aqua"
+                   th:errors="*{standardRoom}"
+                   th:if="${#fields.hasErrors('standardRoom')}">
+                </p>
             </tr>
-
-            <tr>
-                <td>Facility Standar Room:</td>
-                <td>
-                    <input type="text" th:field="*{standardRoom}" />
-                    <p style="color: aqua"
-                       th:errors="*{standardRoom}"
-                       th:if="${#fields.hasErrors('standardRoom')}">
-                    </p>
-                </td>
+            <tr id="option2" style="display: none">
+                <td>Facility Description Other Convenience:<input type="text" th:field="*{descriptionOtherConvenience}" /></td>
+                <p style="color: aqua"
+                   th:errors="*{descriptionOtherConvenience}"
+                   th:if="${#fields.hasErrors('descriptionOtherConvenience')}">
+                </p>
             </tr>
+            <tr id="option3" style="display: none">
+                <td>Facility Pool Area<input type="text" th:field="*{poolArea}" /></td>
+                <p style="color: aqua"
+                   th:errors="*{poolArea}"
+                   th:if="${#fields.hasErrors('poolArea')}">
+                </p>
 
-            <tr>
-                <td>Facility Description Other Convenience:</td>
-                <td>
-                    <input type="text" th:field="*{descriptionOtherConvenience}" />
-                    <p style="color: aqua"
-                       th:errors="*{descriptionOtherConvenience}"
-                       th:if="${#fields.hasErrors('descriptionOtherConvenience')}">
-                    </p>
-                </td>
             </tr>
+            <tr id="option4" style="display: none">
+                <td>Facility Number of Floors:<input type="text" th:field="*{numberOfFloors}" /></td>
+                <p style="color: aqua"
+                   th:errors="*{numberOfFloors}"
+                   th:if="${#fields.hasErrors('numberOfFloors')}">
+                </p>
 
-            <tr>
-                <td>Facility Pool Area:</td>
-                <td>
-                    <input type="text" th:field="*{poolArea}" />
-                    <p style="color: aqua"
-                       th:errors="*{poolArea}"
-                       th:if="${#fields.hasErrors('poolArea')}">
-                    </p>
-                </td>
             </tr>
-
-            <tr>
-                <td>Facility Number of Floors:</td>
-                <td>
-                    <input type="text" th:field="*{numberOfFloors}" />
-                    <p style="color: aqua"
-                       th:errors="*{numberOfFloors}"
-                       th:if="${#fields.hasErrors('numberOfFloors')}">
-                    </p>
-                </td>
+            <tr id="option5" style="display: none">
+                <td>Facility Facility Free:   <input type="text" th:field="*{facilityFree}" /></td>
+                <p style="color: aqua"
+                   th:errors="*{facilityFree}"
+                   th:if="${#fields.hasErrors('facilityFree')}">
+                </p>
             </tr>
-
             <tr>
-                <td>Facility Facility Free:</td>
-                <td>
-                    <input type="text" th:field="*{facilityFree}" />
-                    <p style="color: aqua"
-                       th:errors="*{facilityFree}"
-                       th:if="${#fields.hasErrors('facilityFree')}">
-                    </p>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Facility Rent Type:</td>
-                <td>
-                    <select th:field="*{rentType}">
+                <td>Facility Rent Type: <select th:field="*{rentType}">
                         <option th:each="item:${rentTypeList}" th:value="${item.rentTypeId}" th:text="${item.rentTypeName}"></option>
-                    </select>
-                </td>
+                    </select> </td>
             </tr>
 
             <tr>
-                <td>Facility Type:</td>
-                <td>
-                    <select th:field="*{facilityType}">
+                <td>Facility Type:<select th:field="*{facilityType}" onchange="changeForm(this)">
+                        <option th:value="${''}">Chose Type..</option>
                         <option th:each="item:${facilityTypeList}" th:value="${item.facilityTypeId}" th:text="${item.facilityTypeName}"></option>
-                    </select>
-                </td>
+                    </select></td>
             </tr>
 
         </table>
+
         <button type="submit">Save</button>
+
+
+
+        <!--        <div class="table-dark text-light">
+                    <label>Facility Name:</label>
+                        <input type="text" th:field="*{facilityName}" />
+                        <p style="color: aqua"
+                           th:errors="*{facilityName}"
+                           th:if="${#fields.hasErrors('facilityName')}">
+                        </p>
+                </div>
+
+                <div>
+                    <label>Facility Area:</label>
+
+                        <input type="text" th:field="*{facilityArea}" />
+                        <p style="color: aqua"
+                           th:errors="*{facilityArea}"
+                           th:if="${#fields.hasErrors('facilityArea')}">
+                        </p>
+
+                </div>
+
+                <div>
+                    <label>Facility Rent Cost:</label>
+                        <input type="text" th:field="*{rentCost}" />
+                        <p style="color: aqua"
+                           th:errors="*{rentCost}"
+                           th:if="${#fields.hasErrors('rentCost')}">
+                        </p>
+                </div>
+
+                <div>
+                    <label>Facility Max People:</label>
+                        <input type="text" th:field="*{maxPeople}" />
+                        <p style="color: aqua"
+                           th:errors="*{maxPeople}"
+                           th:if="${#fields.hasErrors('maxPeople')}">
+                        </p>
+                </div>
+
+                <div id="option1" style="display: none">
+                    <label>Facility Standar Room:</label>
+                        <input type="text" th:field="*{standardRoom}" />
+                        <p style="color: aqua"
+                           th:errors="*{standardRoom}"
+                           th:if="${#fields.hasErrors('standardRoom')}">
+                        </p>
+                </div>
+
+                <div id="option2" style="display: none">
+                    <label>Facility Description Other Convenience:</label>
+                        <input type="text" th:field="*{descriptionOtherConvenience}" />
+                        <p style="color: aqua"
+                           th:errors="*{descriptionOtherConvenience}"
+                           th:if="${#fields.hasErrors('descriptionOtherConvenience')}">
+                        </p>
+                </div>
+
+                <div id="option3" style="display: none">
+                    <label>Facility Pool Area:</label>
+                        <input type="text" th:field="*{poolArea}" />
+                        <p style="color: aqua"
+                           th:errors="*{poolArea}"
+                           th:if="${#fields.hasErrors('poolArea')}">
+                        </p>
+                </div>
+
+                <div id="option4" style="display: none">
+                    <label>Facility Number of Floors:</label>
+                        <input type="text" th:field="*{numberOfFloors}" />
+                        <p style="color: aqua"
+                           th:errors="*{numberOfFloors}"
+                           th:if="${#fields.hasErrors('numberOfFloors')}">
+                        </p>
+                </div>
+
+                <div id="option5" style="display: none">
+                    <label>Facility Facility Free:</label>
+                        <input type="text" th:field="*{facilityFree}" />
+                        <p style="color: aqua"
+                           th:errors="*{facilityFree}"
+                           th:if="${#fields.hasErrors('facilityFree')}">
+                        </p>
+                </div>
+
+                <div>
+                    <label>Facility Rent Type:</label>
+                        <select th:field="*{rentType}">
+                            <option th:each="item:${rentTypeList}" th:value="${item.rentTypeId}" th:text="${item.rentTypeName}"></option>
+                        </select>
+                </div>
+
+
+
+                <div>
+                    <td>Facility Type:</td>
+                    <td>
+                        <select th:field="*{facilityType}" onchange="changeForm(this)">
+                            <option th:value="${''}">Chose Type..</option>
+                            <option th:each="item:${facilityTypeList}" th:value="${item.facilityTypeId}" th:text="${item.facilityTypeName}"></option>
+                        </select>
+                    </td>
+                </div>
+
+
+                <button type="submit">Save</button>-->
+
     </form>
 
-</body>
+
+<script>
+    function getIdToDelete(id, name) {
+        document.getElementById("idDelete").value = id;
+        document.getElementById("nameDelete").value = name;
+    }
+    function changeForm(type) {
+        let choseType = type.value;
+        switch (choseType) {
+            case "1":
+                document.getElementById("option1").style.display = "block";
+                document.getElementById("option2").style.display = "block";
+                document.getElementById("option3").style.display = "block";
+                document.getElementById("option4").style.display = "block";
+                document.getElementById("option5").style.display = "none";
+                break;
+            case "2":
+                document.getElementById("option1").style.display = "none";
+                document.getElementById("option2").style.display = "none";
+                document.getElementById("option3").style.display = "none";
+                document.getElementById("option4").style.display = "none";
+                document.getElementById("option").style.display = "block";
+                break;
+            case "3":
+                document.getElementById("option1").style.display = "block";
+                document.getElementById("option2").style.display = "block";
+                document.getElementById("option3").style.display = "none";
+                document.getElementById("option4").style.display = "block";
+                document.getElementById("option5").style.display = "none";
+                break;
+            default:
+                document.getElementById("option1").style.display = "block";
+                document.getElementById("option2").style.display = "block";
+                document.getElementById("option3").style.display = "block";
+                document.getElementById("option4").style.display = "block";
+                document.getElementById("option5").style.display = "block";
+
+        }
+    }
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous">
 </script>
+</body>
 </html>

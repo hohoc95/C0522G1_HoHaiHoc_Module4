@@ -115,6 +115,8 @@ public class CustomerController {
         return "redirect:/customer";
     }
 
+
+
 /*
     @GetMapping("/delete/{id}")
     public String remove(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
@@ -133,6 +135,29 @@ public class CustomerController {
         return "redirect:/customer";
     }
 
+        @PostMapping("/delete")
+    public String deleteCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
+        customer.setDelete(true);
+        iCustomerService.save(customer);
+        return "redirect:/customer/list";
+    }
+
+*/
+
+
+/*
+    @GetMapping("/delete/{id}")
+    public String showDeleteForm(@PathVariable int id, Model model) {
+        model.addAttribute("customer", iCustomerService.findById(id));
+        return "customer/delete";
+    }
+
+    @PostMapping("/delete")
+    public String deleteCustomer(@ModelAttribute Customer Customer, RedirectAttributes redirectAttributes) {
+        iCustomerService.remove(customer.getCustomerId());
+        redirectAttributes.addFlashAttribute("mess", "delete successful");
+        return "redirect:/customer";
+    }
 */
 
 

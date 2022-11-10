@@ -49,11 +49,12 @@ public class FacilityController {
                                     @RequestParam(value = "name",defaultValue = "") String name,
                                     @RequestParam(value = "facilityType",defaultValue = "") String facilityType,
                                     Model model) {
-        System.out.println(name);
+//        System.out.println(name);
         model.addAttribute("facilityList", iFacilityService.findByFacilityNameContaining(name,facilityType, pageable));
 //        model.addAttribute("facilityTypeList",iFacilityTypeService.findAll());
 //        model.addAttribute("rentTypeList",iRentTypeService.findAll());
         model.addAttribute("name", name);
+
 
         return "facility/list";
     }
@@ -122,13 +123,13 @@ public class FacilityController {
 
     }
 
-    /*
-     * Xóa mềm - Soft Delete.
-     */
+/*
+* Xóa mềm - Soft Delete.
+*/
 
-    @GetMapping("/delete/{id}")
-    public String remove(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
-        Facility facility = iFacilityService.findById(id);
+    @PostMapping("/delete")
+    public String delete(@RequestParam(value = "deleteId") Integer facilityId, RedirectAttributes redirectAttributes) {
+        Facility facility = iFacilityService.findById(facilityId);
         facility.setDelete(true);
         iFacilityService.save(facility);
         redirectAttributes.addFlashAttribute("mess","Delete successfull!");
@@ -138,5 +139,12 @@ public class FacilityController {
 /*
  * Xóa cứng
  * */
+/*
+    @PostMapping("/delete")
+    public String delete(@RequestParam(value = "deleteId") Integer facilityId) {
+        iFacilityService.remove(facilityId);
+        return "redirect:/facility";
+    }
+*/
 
 }
