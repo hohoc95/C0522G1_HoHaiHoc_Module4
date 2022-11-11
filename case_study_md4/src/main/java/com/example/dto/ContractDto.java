@@ -1,16 +1,27 @@
 package com.example.dto;
 
 import com.example.model.customer.Customer;
-import com.example.model.employee.Employee;
 import com.example.model.facility.Facility;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ContractDto implements Validator {
     private Integer contractId;
+
+
+    @NotBlank(message = "không được để trống.")
     private String startDate;
+
+    @NotBlank(message = "không được để trống.")
     private String endDate;
+
+    @NotNull(message = "không được để trống.")
+    @NotBlank(message = "không được để trống.")
     private String deposit;
+    
     private boolean isDelete;
 //    private Employee employee;
     private Customer customer;

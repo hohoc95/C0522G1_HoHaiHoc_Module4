@@ -58,16 +58,35 @@
 
             <tr>
                 <td>Customer Phone</td>
-                <td><input type="text" th:field="*{customerPhone}"></td>
+                <td>
+                    <input type="text" th:field="*{customerPhone}">
+                    <p style="color: aqua"
+                       th:errors="*{customerPhone}"
+                       th:if="${#fields.hasErrors('customerPhone')}">
+                    </p>
+
+                </td>
             </tr>
 
             <tr>
                 <td>Customer Email</td>
-                <td><input type="text" th:field="*{customerEmail}"></td>
+                <td>
+                    <input type="text" th:field="*{customerEmail}">
+                    <p style="color: aqua"
+                       th:errors="*{customerEmail}"
+                       th:if="${#fields.hasErrors('customerEmail')}">
+                    </p>
+                </td>
             </tr>
             <tr>
                 <td>Customer Address</td>
-                <td><input type="text" th:field="*{customerAddress}"></td>
+                <td>
+                    <input type="text" th:field="*{customerAddress}">
+                    <p style="color: aqua"
+                       th:errors="*{customerAddress}"
+                       th:if="${#fields.hasErrors('customerAddress')}">
+                    </p>
+                </td>
             </tr>
 
             <tr>

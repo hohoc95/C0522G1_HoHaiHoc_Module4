@@ -63,6 +63,31 @@
 
 </table>
 
+<!--
+Modal view Danh sách dịch vụ đi kèm
+-->
+
+<div class="modal fade" id="showAttachDetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/contract/viewModal" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Danh sách dịch vụ đi kèm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="number" hidden id="viewId" name="viewId">
+                    <span id="nameContract" class="fw-bold"></span>
+                    <span id="attachFacilityId" class="fw-bold"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-5">
 
@@ -99,6 +124,15 @@
 
     </div>
 </div>
+
+<script>
+    function showAttachDetail( attachFacilityId){
+        document.getElementById("viewId").value = attachFacilityId;
+        document.getElementById("nameContract").innerText = attachFacilityId;
+        document.getElementById("attachFacilityId").innerText = contracDetail.attachFacility.attachFacilityId;
+    }
+</script>
+
 
 
 </body>

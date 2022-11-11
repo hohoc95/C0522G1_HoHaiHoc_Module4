@@ -124,8 +124,8 @@ public class FacilityController {
     }
 
 /*
-* Xóa mềm - Soft Delete.
-*/
+     * Xóa mềm - Soft Delete.
+     */
 
     @PostMapping("/delete")
     public String delete(@RequestParam(value = "deleteId") Integer facilityId, RedirectAttributes redirectAttributes) {

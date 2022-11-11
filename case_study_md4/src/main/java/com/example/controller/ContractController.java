@@ -105,19 +105,16 @@ public class ContractController {
             return "redirect:/contract";
         }
 
-    @GetMapping("/view/{id}")
-    public String showViewForm(@PathVariable int id, Model model){
-        model.addAttribute("contract", iContractService.findById(id));
-        return "/view";
+    @PostMapping("/viewModal")
+    public String showViewForm(@RequestParam(value = "viewId") Integer contractId){
+        iContractService.findById(contractId);
+        iAttachFacilityService.findAll();
+        return "redirect:/facility";
     }
-
-
-/*    @GetMapping("/view/{id}")
-    public String showViewForm(@PathVariable int id, Model model){
-        model.addAttribute("book", iBookService.findById(id));
-        return "/view";
+/*    @PostMapping("/delete")
+    public String delete(@RequestParam(value = "deleteId") Integer facilityId) {
+        iFacilityService.remove(facilityId);
+        return "redirect:/facility";
     }*/
-
-//    @GetMapping("")
 
 }

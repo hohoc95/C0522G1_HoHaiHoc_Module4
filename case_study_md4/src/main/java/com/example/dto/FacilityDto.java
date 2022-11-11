@@ -5,16 +5,38 @@ import com.example.model.facility.RentType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 public class FacilityDto implements Validator {
     private int facilityId;
+
+    @NotBlank(message = "Tên dịch vụ không được để trống.")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "Tên dịch vụ không chứa các kí tự đặc biệt như @;,.=-+,...")
     private String facilityName;
+
+    @NotBlank(message = "không được để trống.")
     private String facilityArea;
+
+    @NotBlank(message = "không được để trống.")
     private String rentCost;
+
+    @NotBlank(message = "không được để trống.")
     private String maxPeople;
+
+    @NotBlank(message = "không được để trống.")
     private String standardRoom;
+
+    @NotBlank(message = "không được để trống.")
     private String descriptionOtherConvenience;
+
+    @NotBlank(message = "không được để trống.")
     private String poolArea;
+
+    @NotBlank(message = "không được để trống.")
     private String numberOfFloors;
+
+    @NotBlank(message = "không được để trống.")
     private String facilityFree;
     private boolean isDelete;
     private RentType rentType;

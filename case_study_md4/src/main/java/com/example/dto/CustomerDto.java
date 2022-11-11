@@ -4,14 +4,33 @@ import com.example.model.customer.CustomerType;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 public class CustomerDto  implements Validator {
     private int customerId;
+
+    @NotBlank(message = "Tên khách hàng không được để trống.")
+    @Pattern(regexp = "^[a-zA-Z0-9 ]*$", message = "Tên khách hàng không chứa các kí tự đặc biệt như @;,.=-+,...")
     private String customerName;
+
+    @NotBlank(message = "không được để trống.")
     private String customerDayOfBirth;
+
     private int customerGender;
+
+    @NotBlank(message = "không được để trống.")
     private String customerIdCard;
+
+    @NotBlank(message = "không được để trống.")
+
+    @NotBlank(message = "không được để trống.")
     private String customerPhone;
+
+    @NotBlank(message = "không được để trống.")
     private String customerEmail;
+
+    @NotBlank(message = "không được để trống.")
     private String customerAddress;
     private boolean isDelete;
 //    private int isDelete;

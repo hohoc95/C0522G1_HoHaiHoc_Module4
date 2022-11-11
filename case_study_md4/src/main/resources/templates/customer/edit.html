@@ -33,7 +33,7 @@
         <tr>
             <td>Customer Day of Birth</td>
             <td>
-                <input type="text" th:field="*{customerDayOfBirth}">
+                <input type="date" th:field="*{customerDayOfBirth}">
                 <p style="color: aqua"
                    th:errors="*{customerDayOfBirth}"
                    th:if="${#fields.hasErrors('customerDayOfBirth')}">

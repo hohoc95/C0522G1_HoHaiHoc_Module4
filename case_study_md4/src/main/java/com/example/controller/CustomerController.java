@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.dto.CustomerDto;
 import com.example.model.customer.Customer;
 import com.example.model.customer.CustomerType;
+import com.example.model.facility.Facility;
 import com.example.service.customer.ICustomerService;
 import com.example.service.customer.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
@@ -105,60 +106,19 @@ public class CustomerController {
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public String remove(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
-        Customer customer = iCustomerService.findById(id);
+    /*
+     * Xóa mềm - Soft Delete.
+     */
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam(value = "deleteId") Integer customerId, RedirectAttributes redirectAttributes) {
+        Customer customer = iCustomerService.findById(customerId);
         customer.setDelete(true);
 //        customer.setDelete(1);
         iCustomerService.save(customer);
         redirectAttributes.addFlashAttribute("mess","Delete successfull!");
         return "redirect:/customer";
+
     }
-
-
-
-/*
-    @GetMapping("/delete/{id}")
-    public String remove(@PathVariable(value = "id") Integer id, RedirectAttributes redirectAttributes) {
-        Customer customer = iCustomerService.findById(id);
-        customer.setDelete(true);
-//        customer.setDelete(1);
-        iCustomerService.save(customer);
-        redirectAttributes.addFlashAttribute("mess","Delete successfull!");
-        return "customer/delete";
-    }
-
-    @PostMapping("/delete")
-    public String deleteCustomer(@ModelAttribute Customer customer,RedirectAttributes redirectAttributes){
-        iCustomerService.remove(customer.getCustomerId());
-        redirectAttributes.addFlashAttribute("mess", "delete successful!");
-        return "redirect:/customer";
-    }
-
-        @PostMapping("/delete")
-    public String deleteCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes) {
-        customer.setDelete(true);
-        iCustomerService.save(customer);
-        return "redirect:/customer/list";
-    }
-
-*/
-
-
-/*
-    @GetMapping("/delete/{id}")
-    public String showDeleteForm(@PathVariable int id, Model model) {
-        model.addAttribute("customer", iCustomerService.findById(id));
-        return "customer/delete";
-    }
-
-    @PostMapping("/delete")
-    public String deleteCustomer(@ModelAttribute Customer Customer, RedirectAttributes redirectAttributes) {
-        iCustomerService.remove(customer.getCustomerId());
-        redirectAttributes.addFlashAttribute("mess", "delete successful");
-        return "redirect:/customer";
-    }
-*/
-
 
 }
