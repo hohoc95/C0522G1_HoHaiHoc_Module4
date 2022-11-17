@@ -1,33 +1,38 @@
-package com.example.dto;
+package com.example.model.contract;
 
 import com.example.model.customer.Customer;
+import com.example.model.employee.Employee;
 import com.example.model.facility.Facility;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
+import java.util.Set;
 
-public class ContractDto implements Validator {
+@Entity
+public class Contract {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer contractId;
-
-
-    @NotBlank(message = "không được để trống.")
     private String startDate;
-
-    @NotBlank(message = "không được để trống.")
     private String endDate;
-
-    @NotNull(message = "không được để trống.")
-    @NotBlank(message = "không được để trống.")
     private String deposit;
+    private boolean deleteStatus;
 
-    private boolean isDelete;
-//    private Employee employee;
+    @OneToMany(mappedBy = "contract")
+    private Set<ContractDetail> contractDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "employeeId")
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id", referencedColumnName = "customerId")
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "facility_id", referencedColumnName = "facilityId")
     private Facility facility;
 
-    public ContractDto() {
+    public Contract() {
     }
 
     public Integer getContractId() {
@@ -62,21 +67,29 @@ public class ContractDto implements Validator {
         this.deposit = deposit;
     }
 
-    public boolean isDelete() {
-        return isDelete;
+    public boolean isDeleteStatus() {
+        return deleteStatus;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setDeleteStatus(boolean deleteStatus) {
+        this.deleteStatus = deleteStatus;
     }
 
-//    public Employee getEmployee() {
-//        return employee;
-//    }
-//
-//    public void setEmployee(Employee employee) {
-//        this.employee = employee;
-//    }
+    public Set<ContractDetail> getContractDetail() {
+        return contractDetail;
+    }
+
+    public void setContractDetail(Set<ContractDetail> contractDetail) {
+        this.contractDetail = contractDetail;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     public Customer getCustomer() {
         return customer;
@@ -92,15 +105,5 @@ public class ContractDto implements Validator {
 
     public void setFacility(Facility facility) {
         this.facility = facility;
-    }
-
-    @Override
-    public boolean supports(Class<?> clazz) {
-        return false;
-    }
-
-    @Override
-    public void validate(Object target, Errors errors) {
-        ContractDto contractDto = (ContractDto) target;
     }
 }

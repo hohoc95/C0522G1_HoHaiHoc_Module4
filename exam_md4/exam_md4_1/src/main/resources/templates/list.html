@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+</head>
+<body>
+    <a th:href="@{/create}">Add new customer</a>
+
+
+    <form action="/">
+        <input type="text" name="id" placeholder="Id search" th:value="${id}">
+        <input type="text" name="name" placeholder="Name search " th:value="${name}">
+        <input type="text" name="phone" placeholder="Phone" th:value="${phone}">
+
+        <button type="submit">Search</button>
+
+    </form>
+
+    <table border="1" class="table table-light table-striped table-bordered">
+        <tr class="table-dark text-light">
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Date of Start</th>
+            <th>Rent Type</th>
+            <th>Note</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>View</th>
+        </tr>
+
+        <tr th:each="room : ${roomList}">
+            <td th:text="${room.roomId}"></td>
+            <td th:text="${room.roomName}"></td>
+            <td th:text="${room.roomPhone}"></td>
+            <td th:text="${room.dateOfStart}"></td>
+            <td th:text="${room.rentType.rentTypeName}"></td>
+            <td th:text="${room.roomNote}"></td>
+            <td><a th:href="@{edit/__${room.roomId}__}">Edit</a></td>
+            <td><a th:href="@{delete/__${room.roomId}__}">Delete</a></td>
+            <td><a th:href="@{view/__${room.roomId}__}">View</a></td>
+        </tr>
+    </table>
+
+    <div class="row">
+        <div class="col-5">
+
+        </div>
+        <div aria-label="Page navigation example" class="text-center col-2" style="overflow-x: hidden;overflow-y: hidden">
+            <ul class="pagination">
+                <li class="page-link"><a
+                        th:href="@{'/'(page=${roomList.number -1},id=${id},name=${name},phone=${phone})}"
+                        th:if="${roomList.hasPrevious()}">Previous</a></li>
+                <li class="page-item">
+                    <a class="page-link" th:if="${roomList.hasPrevious()}"
+                       th:href="@{'/'(page=${roomList.number - 1},id=${id},name=${name},phone=${phone})}"
+                       th:text="${roomList.number }"></a>
+                </li>
+
+                <li class="page-item active">
+                    <a class="page-link" th:text="${roomList.number + 1}"
+                       th:href="@{'/'(page=${roomList.number},id=${id},name=${name},phone=${phone})}">
+                        <span class="sr-only">(trang hiện tại)</span></a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link" th:if="${roomList.hasNext()}"
+                       th:href="@{'/'(page=${roomList.number + 1},id=${id},name=${name},phone=${phone})}"
+                       th:text="${roomList.number + 2}"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{'/'(page=${roomList.number + 1},id=${id},name=${name},phone=${phone})}"
+                       th:if="${roomList.hasNext()}">Next</a></li>
+            </ul>
+        </div>
+        <div class="col-5">
+
+        </div>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous">
+</script>
+</html>

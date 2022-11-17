@@ -54,6 +54,7 @@ public class FacilityController {
 //        model.addAttribute("facilityTypeList",iFacilityTypeService.findAll());
 //        model.addAttribute("rentTypeList",iRentTypeService.findAll());
         model.addAttribute("name", name);
+        model.addAttribute("facilityType", facilityType);
 
 
         return "facility/list";

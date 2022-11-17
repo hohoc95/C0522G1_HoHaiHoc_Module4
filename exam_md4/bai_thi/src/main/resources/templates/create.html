@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+
+    <title>create</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+    <style>
+        a {
+            text-decoration: none;
+            color: #bad8ff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #bad8ff;
+        }
+
+        .formCSS {
+            background-image: url("https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000");
+        }
+
+        body {
+            background-image: url("https://cutewallpaper.org/27/black-wallpaper-iphone-gif/pin-on-things.gif");
+        }
+    </style>
+</head>
+<body>
+<div class="mx-5 px-5 pt-3 mt-5">
+    <h2 class="text-center fw-bold text-light">THÊM MỚI SẢN PHẨM</h2>
+
+    <p class="text-center">
+        <a th:href="@{/}"><i class="fa-solid fa-backward"></i> Quay lại trang danh sách sản phẩm</a>
+    </p>
+
+    <div class="d-flex justify-content-center">
+        <form class="w-50 border border-2 border-success p-3 rounded formCSS" th:action="@{/add}"
+              th:object="${productDto}" method="POST" novalidate="novalidate">
+            <div class="form-group">
+                <label for="name" class="h6">Tên sản phẩm:</label>
+                <p style="color: red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
+                <div class="input-group">
+                    <input type="text" id="name" class="form-control" placeholder="Nhập tên sản phẩm.."
+                           th:field="*{productName}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-person-circle-question"></i></span>
+                </div>
+            </div>
+
+            <div class="mt-3 form-group">
+                <label for="price" class="h6">Giá bắt đầu (VNĐ):</label>
+                <p style="color: red" th:if="${#fields.hasErrors('productPrice')}" th:errors="*{productPrice}"></p>
+                <div class="input-group">
+                    <input type="number" id="price" class="form-control" placeholder="Nhập giá sản phẩm.."
+                           th:field="*{productPrice}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-money-bill-wave"></i></span>
+                </div>
+            </div>
+
+            <div class="mt-3 form-group">
+                <label class="h6" for="type">Loại sản phẩm:</label>
+                <div class="input-group">
+                    <select id="type" class="form-select" th:field="*{productType.productTypeId}">
+                        <option th:each="item : ${productTypeList}" th:value="${item.productTypeId}"
+                                th:text="${item.productTypeName}"></option>
+                    </select>
+                    <span class="input-group-text"><i class="fa-solid fa-ranking-star"></i></span>
+                </div>
+            </div>
+
+            <div class="mt-3 form-group">
+                <label for="status" class="h6">Tình trạng sản phẩm:</label>
+                <p style="color: red" th:if="${#fields.hasErrors('productStatus')}" th:errors="*{productStatus}"></p>
+                <div class="input-group">
+                    <input type="text" id="status" class="form-control" placeholder="Nhập tình trạng sản phẩm.."
+                           th:field="*{productStatus}"/>
+                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                </div>
+            </div>
+
+            <div class="mt-3 text-center">
+                <button class="btn btn-info btn-outline-success btn-sm border border-2 border-success text-dark">
+                    -- Lưu <i class="fa-solid fa-floppy-disk"></i> --
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</html>
